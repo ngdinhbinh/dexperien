@@ -1,0 +1,15 @@
+label.error {font-size: 85%;}
+label.error {
+  color: #D15E5E !important;
+}
+ input.error  {
+  border-color:#D15E5E;
+}
+img.auto{max-width: 100%; height: auto;}
+.btn-control .btn{margin: 5px 0px;}
+.table-datatable .column-status img{width: auto;}
+.bt-update-status,.updatesort {cursor: pointer;}
+.column-200 {max-width: 200px;}
+.imagebox .item img {max-width: 100%; height: auto;}
+#uploadfile {margin-top: 15px;}
+#mapAttraction, #mapProperty {width: 334px; height: 334px; margin-top: 15px;}

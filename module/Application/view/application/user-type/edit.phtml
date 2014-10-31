@@ -1,0 +1,90 @@
+<?php
+	$page_title = 'User Type';
+    if(isset($model["idUserType"]))
+	    $page_function = 'Edit';
+    else
+        $page_function = 'Add';
+	$this->headTitle($page_title.' '.$page_function);
+
+?>
+<div class="row">
+    <div id="breadcrumb" class="col-xs-12">
+        <ol class="breadcrumb">
+            <li><a href="<?php echo $this->basePath() ?>">Dashboard</a></li>
+            <li><a href="<?php echo $this->basePath() ?>/user-type/index"><?php echo $page_title; ?></a></li>
+            <li><a href="#"><?php echo $page_function; ?></a></li>
+        </ol>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-sm-12">
+        <div class="box">
+            <div class="box-header">
+                <div class="box-name">
+                    <i class="fa fa-user"></i>
+                     <span><?php echo $page_title.' '.$page_function; ?></span>
+                </div>
+                <div class="box-icons">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="expand-link">
+                        <i class="fa fa-expand"></i>
+                    </a>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+                <div class="no-move"></div>
+            </div>
+        <div class="box-content">
+            <form id="myForm" action="<?php  echo $this->basePath() ?>/user-type/save" method="post" class="form-horizontal">
+                    <div class="form-group hidden">
+                        <label class="col-sm-3 control-label">ID</label>
+                        <div class="col-sm-5">
+                            <?php echo array_key_exists('idUserType', $model) ? ($model["idUserType"]) : "0" ?>
+                            <input type="text" name="idUserType" id="txtidUserType" class="form-control" readonly="readonly"
+                                   value="<?php echo array_key_exists('idUserType', $model) ? ($model["idUserType"]) : "0" ?>" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">User Type Name</label>
+                        <div class="col-sm-5">
+                            <input type="text" name="strUserTypeName" id="strUserTypeName" class="form-control" value="<?php echo array_key_exists('strUserTypeName', $model) ? ($model["strUserTypeName"]) : "" ?>" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">&nbsp;</label>
+                        <div class="col-sm-5">
+                            <button type="submit" class="button btn btn-default">Save</button>
+                            <a href="<?php  echo $this->basePath() ?>/user-type" class='btclosebox btn btn-default' >Cancel</a>
+                        </div>
+                    </div>
+
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        // add the rule here
+        $.validator.addMethod("valueNotEquals", function(value, element, arg){
+            return arg != value;
+        }, "Please select an option");
+        $('#myForm').validate({
+            rules: {
+                strUserTypeName: {
+                    required: true,
+                    maxlength: 20
+                }
+            },
+            errorPlacement: function(error, element) {
+                error.appendTo(element.parent());
+            }
+        });
+    });
+</script>

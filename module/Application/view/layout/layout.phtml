@@ -1,0 +1,157 @@
+<?php echo $this->doctype(); ?>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <?php echo $this->headTitle('ZF2 '. $this->translate('Dexperien System'))->setSeparator(' - ')->setAutoEscape(false) ?>
+
+        <?php echo $this->headMeta()
+            ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+            ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+        ?>
+
+        <!-- Le styles -->
+        <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
+                        ->prependStylesheet($this->basePath() . '/plugins/select2/select2.css')
+                        ->prependStylesheet('http://fonts.googleapis.com/css?family=Righteous')
+                        ->prependStylesheet('http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css')
+                        ->prependStylesheet($this->basePath() . '/css/custom.css')
+                        ->prependStylesheet($this->basePath() . '/css/style.css')
+                        ->prependStylesheet($this->basePath() . '/plugins/jquery-ui/jquery-ui.min.css')
+                        ->prependStylesheet($this->basePath() . '/plugins/bootstrap/bootstrap.min.css')
+                        ->prependStylesheet($this->basePath() . '/plugins/bootstrap/bootstrap-theme.min.css')
+                        ?>
+
+        <!-- Scripts -->
+        <?php echo $this->headScript()
+            ->prependFile($this->basePath() . '/plugins/bootstrap/bootstrap.min.js')
+            ->prependFile($this->basePath() . '/js/jquery.js')
+            ->prependFile($this->basePath() . '/plugins/bootstrap/respond.min.js', 'text/javascript', array('conditional' => 'lt IE 9',))
+            ->prependFile($this->basePath() . '/plugins/bootstrap/html5shiv.js',   'text/javascript', array('conditional' => 'lt IE 9',))
+        ; ?>
+
+    </head>
+    <body>
+        <!--Start Header-->
+    <header class="navbar">
+        <div class="container-fluid expanded-panel">
+            <div class="row">
+                <div id="logo" class="col-xs-12 col-sm-2">
+                    <a href="<?php echo($this->basePath().'/');?>">Dexperien</a>
+                </div>
+                <div id="top-panel" class="col-xs-12 col-sm-10">
+                    <div class="row">
+                        <div class="col-xs-8 col-sm-4">
+                            <a href="#" class="show-sidebar">
+                              <i class="fa fa-bars"></i>
+                            </a>
+                        </div>
+                        <div class="col-xs-4 col-sm-8 top-panel-right">
+                            <ul class="nav navbar-nav pull-right panel-menu">
+                                <li class="hidden-xs">
+                                    <a href="index.html" class="modal-link">
+                                        <i class="fa fa-bell"></i>
+                                        <span class="badge">7</span>
+                                    </a>
+                                </li>
+                                <li class="hidden-xs">
+                                    <a class="ajax-link" href="ajax/calendar.html">
+                                        <i class="fa fa-calendar"></i>
+                                        <span class="badge">7</span>
+                                    </a>
+                                </li>
+                                <li class="hidden-xs">
+                                    <a href="ajax/page_messages.html" class="ajax-link">
+                                        <i class="fa fa-envelope"></i>
+                                        <span class="badge">7</span>
+                                    </a>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle account" data-toggle="dropdown">
+                                        <div class="avatar">
+                                            <img src="<?php echo($this->basePath() . '/img/avatar.png');?>" class="img-rounded" alt="avatar" />
+                                        </div>
+                                        <i class="fa fa-angle-down pull-right"></i>
+                                        <div class="user-mini pull-right">
+                                            <span class="welcome">Welcome,</span>
+											
+                                            <span>  <?php echo $this->username; ?></span>
+                                        </div>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="#">
+                                                <i class="fa fa-user"></i>
+                                                <span class="hidden-sm text">Profile</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="ajax/page_messages.html" class="ajax-link">
+                                                <i class="fa fa-envelope"></i>
+                                                <span class="hidden-sm text">Messages</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="ajax/gallery_simple.html" class="ajax-link">
+                                                <i class="fa fa-picture-o"></i>
+                                                <span class="hidden-sm text">Albums</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="ajax/calendar.html" class="ajax-link">
+                                                <i class="fa fa-tasks"></i>
+                                                <span class="hidden-sm text">Tasks</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <i class="fa fa-cog"></i>
+                                                <span class="hidden-sm text">Settings</span>
+                                            </a>
+                                        </li>
+                                        <li>
+											
+                                            <a href="<?php echo $this->url('login/process', array('action'=>'logout')); ?>">
+                                                <i class="fa fa-power-off"></i>
+                                                <span class="hidden-sm text">Logout</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!--End Header-->
+    <!--Start Container-->
+    <div id="main" class="container-fluid">
+        <div class="row">
+            <?php  echo $this->render('layout/menu');?>
+            <!--Start Content-->
+            <div id="content" class="col-xs-12 col-sm-10">
+                <div class="main-content">
+                    <?php echo $this->content; ?>
+                </div>
+            </div>
+            <!--End Content-->
+        </div>
+    </div>
+    <!--End Container-->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!--<script src="http://code.jquery.com/jquery.js"></script>-->
+    <script language="javascript" type="text/javascript" src="<?php echo($this->basePath() . '/plugins/jquery.validate/jquery.validate.js');?>"></script>
+    <script language="javascript" type="text/javascript" src="<?php echo($this->basePath() . '/plugins/jquery-ui/jquery-ui.min.js');?>"></script>
+
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script language="javascript" type="text/javascript" src="<?php echo($this->basePath() . '/plugins/bootstrap/bootstrap.min.js');?>"></script>
+    <!---->
+    <script language="javascript" type="text/javascript" src="<?php echo($this->basePath() . '/js/bootbox.min.js');?>"></script>
+    <script language="javascript" type="text/javascript" src="<?php echo($this->basePath() . '/plugins/inputmask/jquery.inputmask.js');?>"></script>
+    <script language="javascript" type="text/javascript" src="<?php echo($this->basePath() . '/plugins/inputmask/jquery.inputmask.numeric.extensions.js');?>"></script>
+    <!-- All functions for this theme + document.ready processing -->
+    <script language="javascript" type="text/javascript" src="<?php echo($this->basePath() . '/js/devoops.js');?>"></script>
+        <?php echo $this->inlineScript() ?>
+    </body>
+</html>

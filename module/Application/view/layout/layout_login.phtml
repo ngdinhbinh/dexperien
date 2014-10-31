@@ -1,0 +1,49 @@
+<?php echo $this->doctype(); ?>
+<html lang="en">
+	<head>
+        <meta charset="utf-8">
+        <?php echo $this->headTitle('ZF2 '. $this->translate('Dexperien System'))->setSeparator(' - ')->setAutoEscape(false) ?>
+
+        <?php echo $this->headMeta()
+            ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+            ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+        ?>
+
+        <!-- Le styles -->
+        <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
+                        ->prependStylesheet($this->basePath() . '/plugins/select2/select2.css')
+                        ->prependStylesheet('http://fonts.googleapis.com/css?family=Righteous')
+                        ->prependStylesheet('http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css')
+                        ->prependStylesheet($this->basePath() . '/css/custom.css')
+                        ->prependStylesheet($this->basePath() . '/css/style.css')
+                        ->prependStylesheet($this->basePath() . '/plugins/jquery-ui/jquery-ui.min.css')
+                        ->prependStylesheet($this->basePath() . '/plugins/bootstrap/bootstrap.min.css')
+                        ->prependStylesheet($this->basePath() . '/plugins/bootstrap/bootstrap-theme.min.css')
+                        ?>
+
+        <!-- Scripts -->
+        <?php echo $this->headScript()
+            ->prependFile($this->basePath() . '/plugins/bootstrap/bootstrap.min.js')
+            ->prependFile($this->basePath() . '/js/jquery.js')
+            ->prependFile($this->basePath() . '/plugins/bootstrap/respond.min.js', 'text/javascript', array('conditional' => 'lt IE 9',))
+            ->prependFile($this->basePath() . '/plugins/bootstrap/html5shiv.js',   'text/javascript', array('conditional' => 'lt IE 9',))
+        ; ?>
+
+    </head>
+<body>
+<div class="container-fluid">
+	<div id="page-login" class="row">
+		<div class="col-xs-12 col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+			<div class="text-right">
+				<a href="page_register.html" class="txt-default">Need an account?</a>
+			</div>
+			<div class="box">
+				<div class="box-content">
+						<?php echo $this->content; ?>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>
