@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.2.7.1
+-- version 4.1.6
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 01, 2014 at 08:39 AM
--- Server version: 5.5.39
--- PHP Version: 5.4.31
+-- Generation Time: Nov 01, 2014 at 11:10 AM
+-- Server version: 5.6.16
+-- PHP Version: 5.5.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -27,7 +27,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE IF NOT EXISTS `tblentity` (
-`idEntity` int(11) NOT NULL,
+  `idEntity` int(11) NOT NULL AUTO_INCREMENT,
   `strName` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
   `strIDNo` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
   `strEmail` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -60,7 +60,8 @@ CREATE TABLE IF NOT EXISTS `tblentity` (
   `strTwitterUserId` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
   `strTwitterTokenId` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
   `strGoogleUserId` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `strGoogleTokenId` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL
+  `strGoogleTokenId` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`idEntity`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
 
 --
@@ -79,7 +80,7 @@ INSERT INTO `tblentity` (`idEntity`, `strName`, `strIDNo`, `strEmail`, `strURL`,
 --
 
 CREATE TABLE IF NOT EXISTS `tblentityuser` (
-`idUser` int(11) NOT NULL,
+  `idUser` int(11) NOT NULL AUTO_INCREMENT,
   `idEntity` int(11) DEFAULT NULL,
   `strLoginId` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
   `strName` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -92,7 +93,9 @@ CREATE TABLE IF NOT EXISTS `tblentityuser` (
   `strCreateBy` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
   `dtCreateDate` datetime DEFAULT NULL,
   `strLastModBy` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `dtLastModDate` datetime DEFAULT NULL
+  `dtLastModDate` datetime DEFAULT NULL,
+  PRIMARY KEY (`idUser`),
+  KEY `idEntity` (`idEntity`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
 
 --
@@ -109,7 +112,7 @@ INSERT INTO `tblentityuser` (`idUser`, `idEntity`, `strLoginId`, `strName`, `str
 --
 
 CREATE TABLE IF NOT EXISTS `tblentityuseraccess` (
-`idUserAccess` int(11) NOT NULL,
+  `idUserAccess` int(11) NOT NULL AUTO_INCREMENT,
   `idUser` int(11) NOT NULL,
   `idModule` int(11) NOT NULL,
   `intAccess` int(11) NOT NULL,
@@ -118,7 +121,10 @@ CREATE TABLE IF NOT EXISTS `tblentityuseraccess` (
   `intView` int(11) DEFAULT NULL,
   `intAdd` int(11) DEFAULT NULL,
   `intDelete` int(11) DEFAULT NULL,
-  `intEdit` int(11) DEFAULT NULL
+  `intEdit` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idUserAccess`),
+  KEY `tblEntityUserAccess_idUser` (`idUser`),
+  KEY `tblEntityUserAccess_idModule` (`idModule`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
 
 --
@@ -126,8 +132,8 @@ CREATE TABLE IF NOT EXISTS `tblentityuseraccess` (
 --
 
 INSERT INTO `tblentityuseraccess` (`idUserAccess`, `idUser`, `idModule`, `intAccess`, `strLastModBy`, `dtLastModDate`, `intView`, `intAdd`, `intDelete`, `intEdit`) VALUES
-(1, 1, 2, 1, 'admin', '2014-10-31 00:00:00', 1, 1, 1, 1),
-(2, 1, 3, 1, 'admin', '2014-10-31 00:00:00', 1, 1, 1, 1);
+(1, 1, 1, 1, 'admin', '2014-10-31 00:00:00', 1, 1, 1, 1),
+(2, 1, 2, 1, 'admin', '2014-10-31 00:00:00', 1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -136,11 +142,12 @@ INSERT INTO `tblentityuseraccess` (`idUserAccess`, `idUser`, `idModule`, `intAcc
 --
 
 CREATE TABLE IF NOT EXISTS `tblmodule` (
-`idModule` int(11) NOT NULL,
+  `idModule` int(11) NOT NULL AUTO_INCREMENT,
   `strModuleName` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `strModuleUrl` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
   `intModuleParent` int(11) DEFAULT NULL,
-  `intSort` int(11) DEFAULT NULL
+  `intSort` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idModule`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
 
 --
@@ -161,7 +168,7 @@ INSERT INTO `tblmodule` (`idModule`, `strModuleName`, `strModuleUrl`, `intModule
 --
 
 CREATE TABLE IF NOT EXISTS `tbluserprofile` (
-`idUser` int(11) NOT NULL,
+  `idUser` int(11) NOT NULL AUTO_INCREMENT,
   `strUserId` varchar(100) NOT NULL,
   `strPassword` varchar(32) NOT NULL,
   `strName` varchar(100) NOT NULL,
@@ -180,7 +187,8 @@ CREATE TABLE IF NOT EXISTS `tbluserprofile` (
   `strLastModBy` varchar(20) NOT NULL,
   `dtLastModDate` datetime NOT NULL,
   `idUserType` int(11) NOT NULL,
-  `strPicture` longblob
+  `strPicture` longblob,
+  PRIMARY KEY (`idUser`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
@@ -197,13 +205,14 @@ INSERT INTO `tbluserprofile` (`idUser`, `strUserId`, `strPassword`, `strName`, `
 --
 
 CREATE TABLE IF NOT EXISTS `tblusertype` (
-`idUserType` int(11) NOT NULL,
+  `idUserType` int(11) NOT NULL AUTO_INCREMENT,
   `strUserTypeName` varchar(20) NOT NULL,
   `intStatus` int(11) NOT NULL,
   `strCreatedBy` varchar(20) NOT NULL,
   `dtCreatedDate` datetime NOT NULL,
   `strLastModBy` varchar(20) NOT NULL,
-  `dtLastModDate` datetime NOT NULL
+  `dtLastModDate` datetime NOT NULL,
+  PRIMARY KEY (`idUserType`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
@@ -221,9 +230,10 @@ INSERT INTO `tblusertype` (`idUserType`, `strUserTypeName`, `intStatus`, `strCre
 --
 
 CREATE TABLE IF NOT EXISTS `users` (
-`id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `pass_word` varchar(100) COLLATE utf8_unicode_ci NOT NULL
+  `pass_word` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
 
 --
@@ -234,91 +244,6 @@ INSERT INTO `users` (`id`, `user_name`, `pass_word`) VALUES
 (1, 'admin', '21232f297a57a5a743894a0e4a801fc3');
 
 --
--- Indexes for dumped tables
---
-
---
--- Indexes for table `tblentity`
---
-ALTER TABLE `tblentity`
- ADD PRIMARY KEY (`idEntity`);
-
---
--- Indexes for table `tblentityuser`
---
-ALTER TABLE `tblentityuser`
- ADD PRIMARY KEY (`idUser`), ADD KEY `idEntity` (`idEntity`);
-
---
--- Indexes for table `tblentityuseraccess`
---
-ALTER TABLE `tblentityuseraccess`
- ADD PRIMARY KEY (`idUserAccess`), ADD KEY `tblEntityUserAccess_idUser` (`idUser`), ADD KEY `tblEntityUserAccess_idModule` (`idModule`);
-
---
--- Indexes for table `tblmodule`
---
-ALTER TABLE `tblmodule`
- ADD PRIMARY KEY (`idModule`);
-
---
--- Indexes for table `tbluserprofile`
---
-ALTER TABLE `tbluserprofile`
- ADD PRIMARY KEY (`idUser`);
-
---
--- Indexes for table `tblusertype`
---
-ALTER TABLE `tblusertype`
- ADD PRIMARY KEY (`idUserType`);
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
- ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `tblentity`
---
-ALTER TABLE `tblentity`
-MODIFY `idEntity` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT for table `tblentityuser`
---
-ALTER TABLE `tblentityuser`
-MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT for table `tblentityuseraccess`
---
-ALTER TABLE `tblentityuseraccess`
-MODIFY `idUserAccess` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT for table `tblmodule`
---
-ALTER TABLE `tblmodule`
-MODIFY `idModule` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
---
--- AUTO_INCREMENT for table `tbluserprofile`
---
-ALTER TABLE `tbluserprofile`
-MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT for table `tblusertype`
---
-ALTER TABLE `tblusertype`
-MODIFY `idUserType` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
---
 -- Constraints for dumped tables
 --
 
@@ -326,14 +251,14 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 -- Constraints for table `tblentityuser`
 --
 ALTER TABLE `tblentityuser`
-ADD CONSTRAINT `tblentityuser_ibfk_1` FOREIGN KEY (`idEntity`) REFERENCES `tblentity` (`idEntity`);
+  ADD CONSTRAINT `tblentityuser_ibfk_1` FOREIGN KEY (`idEntity`) REFERENCES `tblentity` (`idEntity`);
 
 --
 -- Constraints for table `tblentityuseraccess`
 --
 ALTER TABLE `tblentityuseraccess`
-ADD CONSTRAINT `tblEntityUserAccess_idModule` FOREIGN KEY (`idModule`) REFERENCES `tblmodule` (`idModule`),
-ADD CONSTRAINT `tblEntityUserAccess_idUser` FOREIGN KEY (`idUser`) REFERENCES `tblentityuser` (`idUser`);
+  ADD CONSTRAINT `tblEntityUserAccess_idModule` FOREIGN KEY (`idModule`) REFERENCES `tblmodule` (`idModule`),
+  ADD CONSTRAINT `tblEntityUserAccess_idUser` FOREIGN KEY (`idUser`) REFERENCES `tblentityuser` (`idUser`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
