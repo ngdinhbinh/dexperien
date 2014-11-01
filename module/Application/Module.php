@@ -11,6 +11,7 @@ namespace Application;
 
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\Mvc\ModuleRouteListener;
+use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\Mvc\MvcEvent;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
@@ -27,8 +28,18 @@ class Module implements AutoloaderProviderInterface
         $eventManager  = $e->getApplication()->getEventManager();		
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
+		
+		$eventManager->attach('dispatch', array($this, 'loadConfiguration' ));
     }
-	
+	 public function loadConfiguration(MvcEvent $e)
+    {
+        $controller = $e->getTarget();
+        $controllerClass = get_class($controller);
+		
+		$controllerClass = explode("\\",$controllerClass);
+        //set 'variable' into layout...		
+        $controller->layout()->controllername = $controllerClass[2];
+    }
     public function getConfig()
     {
         return include __DIR__ . '/config/module.config.php';

@@ -153,5 +153,15 @@
     <!-- All functions for this theme + document.ready processing -->
     <script language="javascript" type="text/javascript" src="<?php echo($this->basePath() . '/js/devoops.js');?>"></script>
         <?php echo $this->inlineScript() ?>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			var nav = $(".nav.main-menu");
+			var linkActive = $(nav).find("a.active");
+		
+			$(linkActive).parent("li").parent("ul").attr("style","display:block;");
+			$(linkActive).parent("li").parent("ul").prev("a").addClass("active-parent");
+			$(linkActive).parent("li").parent("ul").prev("a").addClass("active");
+		})
+	</script>
     </body>
 </html>

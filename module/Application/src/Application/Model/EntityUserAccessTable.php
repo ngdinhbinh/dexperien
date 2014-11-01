@@ -61,11 +61,13 @@ class EntityUserAccessTable extends AbstractTableGateway implements ServiceLocat
 	
 	public function getItemBystrLoginId($strLoginId)
     {
-		$select = $this->getSql()->select();
+		$sql = new Sql($this->adapter);
+		$select = $sql->select();
+		$select->from(array('f' => 'tblentityuseraccess'))->join(array('b' => 'tblmodule'), 'f.idModule = b.idModule');		
 		$select->where('idUser = 1');
-		$resultSet = $this->selectWith($select);
-		$result = $resultSet->toArray();
 		
+		$resultSet = $this->selectWith($select);
+		$result = $resultSet->toArray();		
 		return $result;
     }
 	

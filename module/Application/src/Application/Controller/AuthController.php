@@ -68,7 +68,7 @@ class AuthController extends AbstractActionController
 				$access = "";
 				foreach($tblRole as $key=>$value){
 					if($value['intAccess'] == 1 ){
-						$access .= $value['idModule']."|";
+						$access .= $value['strModuleUrl']."|";
 					}
 				}
 				$_SESSION['accessRight'] = $access;
