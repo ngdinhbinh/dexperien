@@ -14,7 +14,7 @@ use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Application\Model\UserProfileTable;
+use Application\Model\EntityUserAccessTable;
 use Application\Model\UserTypeTable;
 
 use Zend\Authentication\AuthenticationService;
@@ -48,9 +48,9 @@ class Module implements AutoloaderProviderInterface
     {
         return array(
             'factories' => array(
-                'Application\Model\UserProfileTable' =>  function($sm) {
+                'Application\Model\EntityUserAccessTable' =>  function($sm) {
                     $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
-                    $table = new UserProfileTable($dbAdapter);
+                    $table = new EntityUserAccessTable($dbAdapter);
                     return $table;
                 },
                 'Application\Model\UserTypeTable' =>  function($sm) {
@@ -63,11 +63,10 @@ class Module implements AutoloaderProviderInterface
 				},
 				'AuthService' => function ($sm) {
 					$dbAdapter      = $sm->get('Zend\Db\Adapter\Adapter');
-					$dbTableAuthAdapter  = new DbTableAuthAdapter($dbAdapter, 'users','user_name','pass_word', 'MD5(?)');
+					$dbTableAuthAdapter  = new DbTableAuthAdapter($dbAdapter, 'tblentityuser','strLoginId','strPassword', 'MD5(?)');
 					$authService = new AuthenticationService();
 					$authService->setAdapter($dbTableAuthAdapter);
 					$authService->setStorage($sm->get('Application\Model\MyAuthStorage'));
-
 					return $authService;
 				},
             ),

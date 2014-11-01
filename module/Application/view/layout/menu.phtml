@@ -1,19 +1,108 @@
+<?php 
+	$accessRight = $_SESSION['accessRight'];
+	$arrRightView = explode("|", $accessRight);	
+?>
 <div id="sidebar-left" class="col-xs-2 col-sm-2">
     <ul class="nav main-menu">
         <li>
-            <a href="#" class="active ajax-link">
+            <a href="#" class="dropdown-toggle">
                 <i class="fa fa-dashboard"></i>
-                <span class="hidden-xs">Dashboard</span>
+                <span class="hidden-xs">Entity</span>
             </a>
+			 <ul class="dropdown-menu">                
+                <li class=""><a class="" href="<?php echo $this->basePath('user-type') ?>">Entity Profile</a></li>
+				<li class=""><a class="" href="#">Module Activation</a></li>
+				<li class=""><a class="" href="#">Billing & Invoicing</a></li>
+				<li class=""><a class="" href="#">Service Request</a></li>
+				<li class=""><a class="" href="#">Users</a></li>
+            </ul>
         </li>
         <li class="dropdown">
             <a href="#" class="dropdown-toggle">
                 <i class="fa fa-picture-o"></i>
-                 <span class="hidden-xs">System</span>
+                 <span class="hidden-xs">Members</span>
             </a>
             <ul class="dropdown-menu">
-                <li class=""><a class="" href="#">User Profile</a></li>
-                <li class=""><a class="" href="<?php echo $this->basePath('user-type') ?>">User Type</a></li>
+                <li class=""><a class="" href="#">Leads</a></li>
+                <li class=""><a class="" href="#">Conversion Rule</a></li>
+				<li class=""><a class="" href="#">Members</a></li>
+				<li class=""><a class="" href="#">List</a></li>
+				<li class=""><a class="" href="#">Profile Field</a></li>
+            </ul>
+        </li>
+		<li class="dropdown">
+            <a href="#" class="dropdown-toggle">
+                <i class="fa fa-picture-o"></i>
+                 <span class="hidden-xs">Marketing Campaigns</span>
+            </a>
+            <ul class="dropdown-menu">
+                <li class=""><a class="" href="#">Campaign Management</a></li>
+                <li class=""><a class="" href="#">E-Mail Marketing</a></li>
+				<li class=""><a class="" href="#">SMS Marketing</a></li>
+				<li class=""><a class="" href="#">Social Media</a></li>
+				<li class=""><a class="" href="#">Advertisement</a></li>
+				<li class=""><a class="" href="#">Promotion</a></li>
+				<li class=""><a class="" href="#">Marketing Videos</a></li>
+				<li class=""><a class="" href="#">E-Magazine</a></li>
+				<li class=""><a class="" href="#">Referral Program</a></li>
+				<li class=""><a class="" href="#">E-Voucher</a></li>
+				<li class=""><a class="" href="#">Survey</a></li>
+            </ul>
+        </li>
+		<li class="dropdown">
+            <a href="#" class="dropdown-toggle">
+                <i class="fa fa-picture-o"></i>
+                 <span class="hidden-xs">Reports</span>
+            </a>
+            <ul class="dropdown-menu">
+                <li class=""><a class="" href="#">Campaign Management</a></li>
+                <li class=""><a class="" href="#">E-Mail Marketing</a></li>
+				<li class=""><a class="" href="#">SMS Marketing</a></li>
+				<li class=""><a class="" href="#">Social Media</a></li>
+				<li class=""><a class="" href="#">Advertisement</a></li>
+				<li class=""><a class="" href="#">Promotion</a></li>
+				<li class=""><a class="" href="#">Marketing Videos</a></li>
+				<li class=""><a class="" href="#">E-Magazine</a></li>
+				<li class=""><a class="" href="#">Referral Program</a></li>
+				<li class=""><a class="" href="#">E-Voucher</a></li>
+				<li class=""><a class="" href="#">Survey</a></li>
+            </ul>
+        </li>
+		<li class="dropdown">
+            <a href="#" class="dropdown-toggle">
+                <i class="fa fa-picture-o"></i>
+                 <span class="hidden-xs">Administrator</span>
+            </a>
+            <ul class="dropdown-menu">
+                <li class="dropdown">
+					<a href="#" class="dropdown-toggle">
+						<i class="fa fa-plus-square"></i>
+						<span class="hidden-xs">Master Data</span>
+					</a>
+					
+					<ul class="dropdown-menu">
+						<li class=""><a class="" href="#">Country</a></li>
+						<li class=""><a class="" href="#">Region</a></li>
+						<li class=""><a class="" href="#">State</a></li>
+						<li class=""><a class="" href="#">City</a></li>
+						<li class=""><a class="" href="#">Industry</a></li>
+						<li class=""><a class="" href="#">IPCountry</a></li>
+						<li class=""><a class="" href="#">IPBlacklist</a></li>
+						<li class=""><a class="" href="#">Language</a></li>
+					</ul>
+				</li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle">
+						<i class="fa fa-plus-square"></i>
+						<span class="hidden-xs">Security Rights</span>
+					</a>
+					
+					<ul class="dropdown-menu">
+						<li class=""><a class="" href="#">User Profile</a></li>
+						<li class=""><a class="" href="#">User Group</a></li>
+						<li class=""><a class="" href="#">Access Rights</a></li>
+					</ul>
+				</li>
             </ul>
         </li>
     </ul>

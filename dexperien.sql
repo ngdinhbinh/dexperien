@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 31, 2014 at 05:11 AM
+-- Generation Time: Nov 01, 2014 at 08:39 AM
 -- Server version: 5.5.39
 -- PHP Version: 5.4.31
 
@@ -46,11 +46,13 @@ CREATE TABLE IF NOT EXISTS `tblentity` (
   `intDXPEmailGateway` int(11) DEFAULT NULL,
   `decEmailCost` float DEFAULT NULL,
   `strSMTP` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `strUserId` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `strPassword` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `strEmailUser` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `strEmailPassword` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
   `intDXPSMSGateway` int(11) DEFAULT NULL,
   `decSMSCost` float DEFAULT NULL,
   `strGatewayAddress` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `strSMSUser` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `strSMSPassword` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
   `strAndroidAppId` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
   `striOSAppid` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
   `strFBUserId` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -59,7 +61,16 @@ CREATE TABLE IF NOT EXISTS `tblentity` (
   `strTwitterTokenId` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
   `strGoogleUserId` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
   `strGoogleTokenId` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `tblentity`
+--
+
+INSERT INTO `tblentity` (`idEntity`, `strName`, `strIDNo`, `strEmail`, `strURL`, `strMobileNo`, `strAddress1`, `strAddress2`, `strAddress3`, `strCity`, `strState`, `strCountry`, `strBillingContact`, `strBillingEmail`, `strTechnicalContact`, `strTechnicalEmail`, `intDXPEmailGateway`, `decEmailCost`, `strSMTP`, `strEmailUser`, `strEmailPassword`, `intDXPSMSGateway`, `decSMSCost`, `strGatewayAddress`, `strSMSUser`, `strSMSPassword`, `strAndroidAppId`, `striOSAppid`, `strFBUserId`, `strFBTokenId`, `strTwitterUserId`, `strTwitterTokenId`, `strGoogleUserId`, `strGoogleTokenId`) VALUES
+(1, 'PLUS Trafik', '680402075710', 'plus@gmail.com', 'plustrafik.plus.com.my', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(2, 'RentsMore', '680402075711', 'rents@gmail.com', 'www.rentsmore.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3, 'TripsMore', '680402075712', 'trips@gmail.com', 'www.tripsmore.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -82,7 +93,66 @@ CREATE TABLE IF NOT EXISTS `tblentityuser` (
   `dtCreateDate` datetime DEFAULT NULL,
   `strLastModBy` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
   `dtLastModDate` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `tblentityuser`
+--
+
+INSERT INTO `tblentityuser` (`idUser`, `idEntity`, `strLoginId`, `strName`, `strEmail`, `strMobileNo`, `strAndroidId`, `striOSId`, `strPassword`, `intStatus`, `strCreateBy`, `dtCreateDate`, `strLastModBy`, `dtLastModDate`) VALUES
+(1, 1, 'admin', 'Administrator', 'binhk32xp@gmail.com', '84907668625', NULL, NULL, '21232f297a57a5a743894a0e4a801fc3', 1, 'admin', '2014-10-31 00:00:00', 'admin', '2014-10-31 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblentityuseraccess`
+--
+
+CREATE TABLE IF NOT EXISTS `tblentityuseraccess` (
+`idUserAccess` int(11) NOT NULL,
+  `idUser` int(11) NOT NULL,
+  `idModule` int(11) NOT NULL,
+  `intAccess` int(11) NOT NULL,
+  `strLastModBy` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `dtLastModDate` datetime DEFAULT NULL,
+  `intView` int(11) DEFAULT NULL,
+  `intAdd` int(11) DEFAULT NULL,
+  `intDelete` int(11) DEFAULT NULL,
+  `intEdit` int(11) DEFAULT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `tblentityuseraccess`
+--
+
+INSERT INTO `tblentityuseraccess` (`idUserAccess`, `idUser`, `idModule`, `intAccess`, `strLastModBy`, `dtLastModDate`, `intView`, `intAdd`, `intDelete`, `intEdit`) VALUES
+(1, 1, 2, 1, 'admin', '2014-10-31 00:00:00', 1, 1, 1, 1),
+(2, 1, 3, 1, 'admin', '2014-10-31 00:00:00', 1, 1, 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblmodule`
+--
+
+CREATE TABLE IF NOT EXISTS `tblmodule` (
+`idModule` int(11) NOT NULL,
+  `strModuleName` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `strModuleUrl` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `intModuleParent` int(11) DEFAULT NULL,
+  `intSort` int(11) DEFAULT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
+
+--
+-- Dumping data for table `tblmodule`
+--
+
+INSERT INTO `tblmodule` (`idModule`, `strModuleName`, `strModuleUrl`, `intModuleParent`, `intSort`) VALUES
+(1, 'Entity', 'entity', NULL, 1),
+(2, 'Entity Profile', 'entity-profile', 1, 1),
+(3, 'Module Activation', 'module-activation', 1, 2),
+(4, 'Billing & Invoicing', 'billing-invoicing', 1, 3),
+(5, 'Service Request', 'service-request', 1, 4);
 
 -- --------------------------------------------------------
 
@@ -134,15 +204,15 @@ CREATE TABLE IF NOT EXISTS `tblusertype` (
   `dtCreatedDate` datetime NOT NULL,
   `strLastModBy` varchar(20) NOT NULL,
   `dtLastModDate` datetime NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `tblusertype`
 --
 
 INSERT INTO `tblusertype` (`idUserType`, `strUserTypeName`, `intStatus`, `strCreatedBy`, `dtCreatedDate`, `strLastModBy`, `dtLastModDate`) VALUES
-(1, 'System', 0, '', '2014-10-21 11:10:12', '', '2014-10-21 15:34:43'),
-(2, 'Manager', 0, '', '2014-10-21 15:34:33', '', '2014-10-21 15:34:33');
+(2, 'Manager', 0, '', '2014-10-21 15:34:33', '', '2014-10-21 15:34:33'),
+(4, 'System', 0, '', '2014-10-31 17:24:29', '', '2014-10-31 17:24:29');
 
 -- --------------------------------------------------------
 
@@ -180,6 +250,18 @@ ALTER TABLE `tblentityuser`
  ADD PRIMARY KEY (`idUser`), ADD KEY `idEntity` (`idEntity`);
 
 --
+-- Indexes for table `tblentityuseraccess`
+--
+ALTER TABLE `tblentityuseraccess`
+ ADD PRIMARY KEY (`idUserAccess`), ADD KEY `tblEntityUserAccess_idUser` (`idUser`), ADD KEY `tblEntityUserAccess_idModule` (`idModule`);
+
+--
+-- Indexes for table `tblmodule`
+--
+ALTER TABLE `tblmodule`
+ ADD PRIMARY KEY (`idModule`);
+
+--
 -- Indexes for table `tbluserprofile`
 --
 ALTER TABLE `tbluserprofile`
@@ -205,12 +287,22 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `tblentity`
 --
 ALTER TABLE `tblentity`
-MODIFY `idEntity` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `idEntity` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `tblentityuser`
 --
 ALTER TABLE `tblentityuser`
-MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `tblentityuseraccess`
+--
+ALTER TABLE `tblentityuseraccess`
+MODIFY `idUserAccess` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `tblmodule`
+--
+ALTER TABLE `tblmodule`
+MODIFY `idModule` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `tbluserprofile`
 --
@@ -220,7 +312,7 @@ MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 -- AUTO_INCREMENT for table `tblusertype`
 --
 ALTER TABLE `tblusertype`
-MODIFY `idUserType` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+MODIFY `idUserType` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `users`
 --
@@ -235,6 +327,13 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 ALTER TABLE `tblentityuser`
 ADD CONSTRAINT `tblentityuser_ibfk_1` FOREIGN KEY (`idEntity`) REFERENCES `tblentity` (`idEntity`);
+
+--
+-- Constraints for table `tblentityuseraccess`
+--
+ALTER TABLE `tblentityuseraccess`
+ADD CONSTRAINT `tblEntityUserAccess_idModule` FOREIGN KEY (`idModule`) REFERENCES `tblmodule` (`idModule`),
+ADD CONSTRAINT `tblEntityUserAccess_idUser` FOREIGN KEY (`idUser`) REFERENCES `tblentityuser` (`idUser`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

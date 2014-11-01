@@ -3,21 +3,21 @@ namespace Application\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Form\Annotation\AnnotationBuilder;
-use Application\Model\User;
+use Application\Model\EntityUserAccessTable;
 
 class AuthController extends AbstractActionController
 {
     protected $form;
     protected $storage;
     protected $authservice;
-
+	protected $tblEntityUserAccess;
+	
     public function getAuthService()
     {
         if (! $this->authservice) {
             $this->authservice = $this->getServiceLocator()
                                       ->get('AuthService');
         }
-
         return $this->authservice;
     }
 
@@ -27,19 +27,7 @@ class AuthController extends AbstractActionController
             $this->storage = $this->getServiceLocator()
                                   ->get('Application\Model\MyAuthStorage');
         }
-
         return $this->storage;
-    }
-
-    public function getForm()
-    {
-        if (! $this->form) {
-            $user       = new User();
-            $builder    = new AnnotationBuilder();
-            $this->form = $builder->createForm($user);
-        }
-
-        return $this->form;
     }
 
     public function loginAction()
@@ -71,7 +59,20 @@ class AuthController extends AbstractActionController
 				//check if it has rememberMe :
                 $this->getAuthService()->setStorage($this->getSessionStorage());
                 $this->getAuthService()->getStorage()->write($request->getPost('username'));
-					
+				
+				//Get Role
+				$strUserId = $this->getServiceLocator()->get('AuthService')->getIdentity();	
+				
+				$this->tblEntityUserAccess = $this->getEntityUserAccessTable();
+				$tblRole = $this->tblEntityUserAccess->getItemBystrLoginId($strUserId);
+				$access = "";
+				foreach($tblRole as $key=>$value){
+					if($value['intAccess'] == 1 ){
+						$access .= $value['idModule']."|";
+					}
+				}
+				$_SESSION['accessRight'] = $access;
+				
 				return $this->redirect()->toRoute('home/default', array(
 						'controller' => 'index'
 				));
@@ -80,7 +81,15 @@ class AuthController extends AbstractActionController
 				}
         }
     }
-
+	public function getEntityUserAccessTable()
+    {
+        if (!$this->tblEntityUserAccess) {
+            $sm = $this->getServiceLocator();
+            $this->tblEntityUserAccess = $sm->get('Application\Model\EntityUserAccessTable');
+        }
+        return $this->tblEntityUserAccess;
+    }
+	
     public function logoutAction()
     {
         if ($this->getAuthService()->hasIdentity()) {

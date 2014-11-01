@@ -4,9 +4,11 @@ namespace Application\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
-class UserTypeController extends AbstractActionController
+
+
+class EntityUserAccessController extends AbstractActionController
 {
-	protected $userTypeTable;
+	protected $entityUserAccessTable;
 	
 	public function onDispatch( \Zend\Mvc\MvcEvent $e )
 	{
@@ -26,14 +28,14 @@ class UserTypeController extends AbstractActionController
         $renderer = $this->serviceLocator->get('Zend\View\Renderer\RendererInterface');
         $renderer->HeadScript()->appendFile($renderer->basePath() . '/js/index.js','text/javascript');
         return new ViewModel(array(
-            'data' => $this->getUserTypeTable()->fetchAll(),
+            'data' => $this->getEntityUserAccessTable()->fetchAll(),
         ));
     }
 
     public function editAction()
     {
         $id = (int)$this->params('id');
-        $model = $this->getUserTypeTable()->getItem($id);
+        $model = $this->getEntityUserAccessTable()->getItem($id);
         return new ViewModel(array(
             'model' => $model,
         ));
@@ -46,28 +48,22 @@ class UserTypeController extends AbstractActionController
         $request = $this->getRequest();
         if ($request->isPost()) {
             $formData = ($request->getPost());
-            $idUserType = $request->getPost("idUserType");
+            $idUserAccess = $request->getPost("idUserAccess");
             $data= array(
-                "idUserType"=>$idUserType,
-                "strUserTypeName"=>$request->getPost("strUserTypeName")
+                "idUserAccess"=>$idUserAccess,
+                "idUser"=>$request->getPost("idUser"),
+				"idModule"=>$request->getPost("idModule"),
+				"intAccess"=>$request->getPost("intAccess"),
+				"intView"=>$request->getPost("intView"),
+				"intAdd"=>$request->getPost("intAdd"),
+				"intDelete"=>$request->getPost("intDelete"),
+				"intEdit"=>$request->getPost("intEdit")
             );
-
-            if($idUserType=="0")
-            {
-                $data['strCreatedBy']="";
-                $data['dtCreatedDate']=date('Y-m-d H:i:s');
-                $data['strLastModBy']="";
-                $data['dtLastModDate']=date('Y-m-d H:i:s');
-            }
-            else
-            {
-                $data['strLastModBy']="";
-                $data['dtLastModDate']=date('Y-m-d H:i:s');
-            }
-            $this->getUserTypeTable()->saveItem($data);
+            
+            $this->getEntityUserAccessTable()->saveItem($data);
 
             return $this->redirect()->toRoute('home/default', array(
-                'controller' => 'user-type'
+                'controller' => 'entity-user-access'
             ));
         }
     }
@@ -75,18 +71,18 @@ class UserTypeController extends AbstractActionController
     public function deleteAction()
     {
         $id = (int)$this->params('id');
-        $this->getUserTypeTable()->deleteItem($id);
+        $this->getEntityUserAccessTable()->deleteItem($id);
         $view = new ViewModel();
         $view->setTerminal(true);
         return $view;
     }
 
-    public function getUserTypeTable()
+    public function getEntityUserAccessTable()
     {
-        if (!$this->userTypeTable) {
+        if (!$this->entityUserAccessTable) {
             $sm = $this->getServiceLocator();
-            $this->userTypeTable = $sm->get('Application\Model\UserTypeTable');
+            $this->entityUserAccessTable = $sm->get('Application\Model\EntityUserAccessTable');
         }
-        return $this->userTypeTable;
+        return $this->entityUserAccessTable;
     }
 }
