@@ -1,0 +1,378 @@
+<?php
+	$page_title = 'Entity';
+    if(isset($model["idEntity"]))
+	    $page_function = 'Edit';
+    else
+        $page_function = 'Add';
+	$this->headTitle($page_title.' '.$page_function);
+
+?>
+<div class="row">
+    <div id="breadcrumb" class="col-xs-12">
+        <ol class="breadcrumb">
+            <li><a href="<?php echo $this->basePath() ?>">Dashboard</a></li>
+            <li><a href="<?php echo $this->basePath() ?>/entity/index"><?php echo $page_title; ?></a></li>
+            <li><a href="#"><?php echo $page_function; ?></a></li>
+        </ol>
+    </div>
+</div>
+<div class="row">
+	<form id="defaultForm" action="<?php  echo $this->basePath() ?>/entity/save" method="post" class="form-horizontal">
+		<div class="col-xs-12 col-sm-12">
+			<div class="form-group" style="text-align: right;padding: 0 15px;">
+				<button type="cancel" class="btn btn-default btn-label-left"><span><i class="fa fa-clock-o txt-danger"></i></span>Cancel</button>
+				<button type="submit" class="btn btn-primary btn-label-left"><span><i class="fa fa-clock-o"></i></span>Submit</button>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-6">
+			<div class="box">
+				<div class="box-header">
+					<div class="box-name">
+						<i class="fa fa-pencil"></i>
+						 <span>Entity Contact</span>
+					</div>
+					<div class="box-icons">
+						<a class="collapse-link">
+							<i class="fa fa-chevron-up"></i>
+						</a>
+						<a class="expand-link">
+							<i class="fa fa-expand"></i>
+						</a>
+						<a class="close-link">
+							<i class="fa fa-times"></i>
+						</a>
+					</div>
+					<div class="no-move"></div>
+				</div>			
+				<div class="box-content">				
+					<fieldset>	
+						<div class="form-group hidden">
+							<label class="col-sm-3 control-label">ID</label>
+							<div class="col-sm-5">
+								<input type="text" name="idEntity" id="idEntity" class="form-control" readonly="readonly"
+									   value="<?php echo array_key_exists('idEntity', $model) ? ($model["idEntity"]) : "0" ?>" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">ID No</label>
+							<div class="col-sm-5">
+								<input type="text" class="form-control" name="strIDNo" value="<?php echo array_key_exists('strIDNo', $model) ? ($model["strIDNo"]) : "" ?>"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">Entity Name</label>
+							<div class="col-sm-5">
+								<input type="text" class="form-control" name="strName" value="<?php echo array_key_exists('strName', $model) ? ($model["strName"]) : "" ?>"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">Website URL</label>
+							<div class="col-sm-5">
+								<input type="text" class="form-control" name="strURL" placeholder="http://" value="<?php echo array_key_exists('strURL', $model) ? ($model["strURL"]) : "" ?>"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">App ID</label>
+							<div class="col-sm-5">
+								<input type="text" class="form-control" name="strAppID" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">App Key</label>
+							<div class="col-sm-5">
+								<input type="text" class="form-control" name="strAppKey" />
+							</div>
+						</div>						
+					</fieldset>
+					<fieldset>
+						<legend>Contact Details</legend>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">Mobile</label>
+							<div class="col-sm-3">
+								<input type="text" class="form-control" name="strMobileNo" value="<?php echo array_key_exists('strMobileNo', $model) ? ($model["strMobileNo"]) : "" ?>"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">Email</label>
+							<div class="col-sm-5">
+								<input type="text" class="form-control" name="strEmail"  value="<?php echo array_key_exists('strEmail', $model) ? ($model["strEmail"]) : "" ?>"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">Address</label>
+							<div class="col-sm-5">
+								<input type="text" class="form-control" name="strAddress1" value="<?php echo array_key_exists('strAddress1', $model) ? ($model["strAddress1"]) : "" ?>"/>
+								<input type="text" class="form-control" name="strAddress2" value="<?php echo array_key_exists('strAddress2', $model) ? ($model["strAddress2"]) : "" ?>"/>
+								<input type="text" class="form-control" name="strAddress3" value="<?php echo array_key_exists('strAddress3', $model) ? ($model["strAddress3"]) : "" ?>"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">City</label>
+							<div class="col-sm-5">
+								<input type="text" class="form-control" name="strCity" value="<?php echo array_key_exists('strCity', $model) ? ($model["strCity"]) : "" ?>"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">State</label>
+							<div class="col-sm-5">
+								<input type="text" class="form-control" name="strState" value="<?php echo array_key_exists('strState', $model) ? ($model["strState"]) : "" ?>"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">Country</label>
+							<div class="col-sm-5">
+								<input type="text" class="form-control" name="strCountry" value="<?php echo array_key_exists('strCountry', $model) ? ($model["strCountry"]) : "" ?>"/>
+							</div>
+						</div>
+					</fieldset>
+					<fieldset>
+						<legend>Notification To be Sent To</legend>
+						<h4 class="sub-title">Billing Matters</h4>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">Name</label>
+							<div class="col-sm-5">
+								<input type="text" class="form-control" name="strBillingContact" value="<?php echo array_key_exists('strBillingContact', $model) ? ($model["strBillingContact"]) : "" ?>"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">Email</label>
+							<div class="col-sm-5">
+								<input type="text" class="form-control" name="strBillingEmail"  value="<?php echo array_key_exists('strBillingEmail', $model) ? ($model["strBillingEmail"]) : "" ?>" />
+							</div>
+						</div>
+						<h4 class="sub-title">Technical Matters</h4>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">Name</label>
+							<div class="col-sm-5">
+								<input type="text" class="form-control" name="strTechnicalContact" value="<?php echo array_key_exists('strTechnicalContact', $model) ? ($model["strTechnicalContact"]) : "" ?>"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">Email</label>
+							<div class="col-sm-5">
+								<input type="text" class="form-control" name="strTechnicalEmail"  value="<?php echo array_key_exists('strTechnicalEmail', $model) ? ($model["strTechnicalEmail"]) : "" ?>"/>
+							</div>
+						</div>
+					</fieldset>
+					<fieldset>
+						<legend>SMTP Details</legend>						
+						<div class="form-group">
+							<label class="col-sm-5 control-label">Use Dexperien SMTP gateway</label>
+							<div class="col-sm-3">
+								
+								<div class="toggle-switch ">
+									<label>
+										<input type="checkbox" <?php echo $model["intDXPEmailGateway"] == 1 ? "checked": "" ?> name="intDXPEmailGateway">
+										<div class="toggle-switch-inner"></div>
+										<div class="toggle-switch-switch"><i class="fa fa-check"></i></div>
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">SMTP</label>
+							<div class="col-sm-5">
+								<input type="text" class="form-control" name="strSMTP"  value="<?php echo array_key_exists('strSMTP', $model) ? ($model["strSMTP"]) : "" ?>"/>
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label class="col-sm-3 control-label">User Id</label>
+							<div class="col-sm-5">
+								<input type="text" class="form-control" name="strEmailUser" value="<?php echo array_key_exists('strEmailUser', $model) ? ($model["strEmailUser"]) : "" ?>"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">Password</label>
+							<div class="col-sm-5">
+								<input type="text" class="form-control" name="strEmailPassword"  value="<?php echo array_key_exists('strEmailPassword', $model) ? ($model["strEmailPassword"]) : "" ?>"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">Port</label>
+							<div class="col-sm-5">
+								<input type="text" class="form-control" name=""  />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">Email Cost</label>
+							<div class="col-sm-5">
+								<input type="text" class="form-control" name="decEmailCost"  value="<?php echo array_key_exists('decEmailCost', $model) ? ($model["decEmailCost"]) : "" ?>"/>
+							</div>
+						</div>
+					</fieldset>		
+					<fieldset>
+						<legend>SMS Gateway</legend>						
+						<div class="form-group">
+							<label class="col-sm-5 control-label">Use Dexperien SMS gateway</label>
+							<div class="col-sm-3">
+								
+								<div class="toggle-switch">
+									<label>
+										<input type="checkbox" name="intDXPSMSGateway" <?php echo $model["intDXPSMSGateway"] == 1 ? "checked": "" ?>>
+										<div class="toggle-switch-inner"></div>
+										<div class="toggle-switch-switch"><i class="fa fa-check"></i></div>
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">SMS HTTP</label>
+							<div class="col-sm-5">
+								<input type="text" class="form-control" name="strGatewayAddress"  value="<?php echo array_key_exists('strGatewayAddress', $model) ? ($model["strGatewayAddress"]) : "" ?>"/>
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label class="col-sm-3 control-label">User Id</label>
+							<div class="col-sm-5">
+								<input type="text" class="form-control" name="strSMSUser" value="<?php echo array_key_exists('strSMSUser', $model) ? ($model["strSMSUser"]) : "" ?>"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">Password</label>
+							<div class="col-sm-5">
+								<input type="text" class="form-control" name="strSMSPassword"  value="<?php echo array_key_exists('strSMSPassword', $model) ? ($model["strSMSPassword"]) : "" ?>"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">SMS Cost</label>
+							<div class="col-sm-5">
+								<input type="text" class="form-control" name="decSMSCost" value="<?php echo array_key_exists('decSMSCost', $model) ? ($model["decSMSCost"]) : "" ?>" />
+							</div>
+						</div>
+					</fieldset>						
+				</div>			
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-6">
+			<div class="box">
+				<div class="box-header">
+					<div class="box-name">
+						<i class="fa fa-pencil"></i>
+						 <span>Social Media Interface</span>
+					</div>
+					<div class="box-icons">
+						<a class="collapse-link">
+							<i class="fa fa-chevron-up"></i>
+						</a>
+						<a class="expand-link">
+							<i class="fa fa-expand"></i>
+						</a>
+						<a class="close-link">
+							<i class="fa fa-times"></i>
+						</a>
+					</div>
+					<div class="no-move"></div>
+				</div>			
+				<div class="box-content">	
+					<h4 class="sub-title">Facebook</h4>
+					<div class="form-group">
+						<label class="col-sm-3 control-label">Facebook Id</label>
+						<div class="col-sm-5">
+							<input type="text" class="form-control" name="strFBUserId" value="<?php echo array_key_exists('decSMSCost', $model) ? ($model["strFBUserId"]) : "" ?>" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label">Password</label>
+						<div class="col-sm-5">
+							<input type="text" class="form-control" name="strFBTokenId" value="<?php echo array_key_exists('decSMSCost', $model) ? ($model["strFBTokenId"]) : "" ?>" />
+						</div>
+					</div>
+					<h4 class="sub-title">Twitter</h4>
+					<div class="form-group">
+						<label class="col-sm-3 control-label">Twitter Id</label>
+						<div class="col-sm-5">
+							<input type="text" class="form-control" name="strTwitterUserId" value="<?php echo array_key_exists('decSMSCost', $model) ? ($model["strTwitterUserId"]) : "" ?>"  />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label">Password</label>
+						<div class="col-sm-5">
+							<input type="text" class="form-control" name="strTwitterTokenId" value="<?php echo array_key_exists('decSMSCost', $model) ? ($model["strTwitterTokenId"]) : "" ?>"  />
+						</div>
+					</div>
+					<h4 class="sub-title">Google PLUS</h4>
+					<div class="form-group">
+						<label class="col-sm-3 control-label">Google PLUS Id</label>
+						<div class="col-sm-5">
+							<input type="text" class="form-control" name="strGoogleUserId" value="<?php echo array_key_exists('decSMSCost', $model) ? ($model["strGoogleUserId"]) : "" ?>"  />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label">Password</label>
+						<div class="col-sm-5">
+							<input type="text" class="form-control" name="strGoogleTokenId" value="<?php echo array_key_exists('decSMSCost', $model) ? ($model["strGoogleTokenId"]) : "" ?>"  />
+						</div>
+					</div>					
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-6">
+			<div class="box">
+				<div class="box-header">
+					<div class="box-name">
+						<i class="fa fa-pencil"></i>
+						 <span>Mobile App</span>
+					</div>
+					<div class="box-icons">
+						<a class="collapse-link">
+							<i class="fa fa-chevron-up"></i>
+						</a>
+						<a class="expand-link">
+							<i class="fa fa-expand"></i>
+						</a>
+						<a class="close-link">
+							<i class="fa fa-times"></i>
+						</a>
+					</div>
+					<div class="no-move"></div>
+				</div>			
+				<div class="box-content">	
+					<h4 class="sub-title">Push Notification</h4>
+					<div class="form-group">
+						<label class="col-sm-3 control-label">Andoid Id</label>
+						<div class="col-sm-5">
+							<input type="text" class="form-control" name="strAndroidAppId"  value="<?php echo array_key_exists('strAndroidAppId', $model) ? ($model["strAndroidAppId"]) : "" ?>"/>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label">iOS Id</label>
+						<div class="col-sm-5">
+							<input type="text" class="form-control" name="striOSAppid"  value="<?php echo array_key_exists('striOSAppid', $model) ? ($model["striOSAppid"]) : "" ?>"/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-12">
+			<div class="form-group" style="text-align: left;padding: 0 15px;">
+				<button type="cancel" class="btn btn-default btn-label-left"><span><i class="fa fa-clock-o txt-danger"></i></span>Cancel</button>
+				<button type="submit" class="btn btn-primary btn-label-left"><span><i class="fa fa-clock-o"></i></span>Submit</button>
+			</div>
+		</div>
+	</form>
+</div>
+<script type="text/javascript">
+    $(document).ready(function() {
+        // add the rule here
+        $.validator.addMethod("valueNotEquals", function(value, element, arg){
+            return arg != value;
+        }, "Please select an option");
+        $('#defaultForm').validate({
+            rules: {
+                strIDNo: {
+                    required: true,
+                    maxlength: 200
+                },
+				strName: {
+                    required: true,
+                    maxlength: 200
+                }
+            },
+            errorPlacement: function(error, element) {
+                error.appendTo(element.parent());
+            }
+        });
+    });
+</script>

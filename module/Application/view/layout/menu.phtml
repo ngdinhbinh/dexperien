@@ -13,18 +13,18 @@
                 <i class="fa fa-dashboard"></i>
                 <span class="hidden-xs">Entity</span>
             </a>
-			 <ul class="dropdown-menu">                
-				<?php  if(in_array("entity-profile",$arrRightView)) { ?>
-                <li class=""><a class="<?php echo ($controllerName == "UserTypeController") ? "active" : "" ; ?>" href="<?php echo $this->basePath('user-type') ?>">Entity Profile</a></li>
-				<?php } ?>
-				<?php  if(in_array("module-activation",$arrRightView)) { ?>
-				<li class=""><a class="" href="#">Module Activation</a></li>
-				<?php } ?>
+			 <ul class="dropdown-menu">      
+				<?php  if(in_array("entity",$arrRightView)) { ?>
+                <li class=""><a class="<?php echo ($controllerName == "EntityController") ? "active" : "" ; ?>" href="<?php echo $this->basePath('entity') ?>">Entity Profile</a></li>
+				<?php } ?>				
+				 <?php  if(in_array("module",$arrRightView)) { ?>
+				<li class=""><a class="<?php echo ($controllerName == "ModuleController") ? "active" : "" ; ?>" href="<?php echo $this->basePath('module') ?>">Module Activation</a></li>
+				<?php } ?> 
 				<?php  if(in_array("billing-invoicing",$arrRightView)) { ?>
 				<li class=""><a class="" href="#">Billing & Invoicing</a></li>
 				<?php } ?>
-				<?php  if(in_array("service-request",$arrRightView)) { ?>
-				<li class=""><a class="" href="#">Service Request</a></li>
+				<?php  if(in_array("entity-user",$arrRightView)) { ?>
+				<li class=""><a class="<?php echo ($controllerName == "EntityUserController") ? "active" : "" ; ?>" href="<?php echo $this->basePath('entity-user') ?>">Users</a></li>
 				<?php } ?>
 				<?php  if(in_array("users",$arrRightView)) { ?>
 				<li class=""><a class="" href="#">Users</a></li>

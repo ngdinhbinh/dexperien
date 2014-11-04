@@ -1,0 +1,341 @@
+<?php
+	$page_title = 'User';
+    if(isset($model["idUser"]))
+	    $page_function = 'Edit';
+    else
+        $page_function = 'Add';
+	$this->headTitle($page_title.' '.$page_function);
+
+?>
+<div class="row">
+    <div id="breadcrumb" class="col-xs-12">
+        <ol class="breadcrumb">
+            <li><a href="<?php echo $this->basePath() ?>">Dashboard</a></li>
+            <li><a href="<?php echo $this->basePath() ?>/entity/index"><?php echo $page_title; ?></a></li>
+            <li><a href="#"><?php echo $page_function; ?></a></li>
+        </ol>
+    </div>
+</div>
+<div class="row">
+	<form id="defaultForm" action="<?php  echo $this->basePath() ?>/entity-user/save" method="post" class="form-horizontal">
+		<div class="col-xs-12 col-sm-12">
+			<div class="form-group" style="text-align: right;padding: 0 15px;">
+				<button type="cancel" class="btn btn-default btn-label-left"><span><i class="fa fa-clock-o txt-danger"></i></span>Cancel</button>
+				<button type="submit" class="btn btn-primary btn-label-left"><span><i class="fa fa-clock-o"></i></span>Submit</button>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-12">
+			<div class="box">
+				<div class="box-header">
+					<div class="box-name">
+						<i class="fa fa-pencil"></i>
+						 <span>User Detail</span>
+					</div>
+					<div class="box-icons">
+						<a class="collapse-link">
+							<i class="fa fa-chevron-up"></i>
+						</a>
+						<a class="expand-link">
+							<i class="fa fa-expand"></i>
+						</a>
+						<a class="close-link">
+							<i class="fa fa-times"></i>
+						</a>
+					</div>
+					<div class="no-move"></div>
+				</div>			
+				<div class="box-content">				
+					<fieldset>	
+						<div class="form-group hidden">
+							<label class="col-sm-3 control-label">idUser</label>
+							<div class="col-sm-5">
+								<input type="text" name="idUser" id="idUser" class="form-control" readonly="readonly"
+									   value="<?php echo array_key_exists('idUser', $model) ? ($model["idUser"]) : "0" ?>" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">Entity</label>
+							<div class="col-sm-5">
+								<select id="idEntity" name="idEntity" class="populate placeholder">
+									<option value="-1">-- Select Entity --</option>
+									<?php 
+										$idEntity = $model["idEntity"];
+										foreach($data_entity as $item) : 
+											if($idEntity == $item['idEntity'])
+												echo '<option value="'.$item['idEntity'].'" selected >'.$item['strName'].'</option>';
+											else
+												echo '<option value="'.$item['idEntity'].'" >'.$item['strName'].'</option>';
+									
+										endforeach; 
+									?>
+								</select>
+					
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">Name</label>
+							<div class="col-sm-5">
+								<input type="text" class="form-control" name="strName" value="<?php echo array_key_exists('strName', $model) ? ($model["strName"]) : "" ?>"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">Login Name</label>
+							<div class="col-sm-5">
+								<input type="text" class="form-control" name="strLoginId" value="<?php echo array_key_exists('strLoginId', $model) ? ($model["strLoginId"]) : "" ?>" <?php echo $page_function =="Edit" ? "readonly": "" ?>/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">Email</label>
+							<div class="col-sm-5">
+								<input type="text" class="form-control" name="strEmail" value="<?php echo array_key_exists('strEmail', $model) ? ($model["strEmail"]) : "" ?>"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">Mobile No</label>
+							<div class="col-sm-5">
+								<input type="text" class="form-control" name="strMobileNo" placeholder="" value="<?php echo array_key_exists('strMobileNo', $model) ? ($model["strMobileNo"]) : "" ?>"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">Android Id</label>
+							<div class="col-sm-5">
+								<input type="text" class="form-control" name="strAndroidId" value="<?php echo array_key_exists('strAndroidId', $model) ? ($model["strAndroidId"]) : "" ?>"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">iOS Id</label>
+							<div class="col-sm-5">
+								<input type="text" class="form-control" name="striOSId" value="<?php echo array_key_exists('striOSId', $model) ? ($model["striOSId"]) : "" ?>"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">Password</label>
+							<div class="col-sm-5">
+								<input type="password" class="form-control" name="strPassword"  />
+							</div>
+						</div>	
+						<div class="form-group">
+							<label class="col-sm-3 control-label">Status</label>
+							<div class="col-sm-5">
+								<select id="intStatus" name="intStatus" class="populate placeholder">		
+									<option value="-1">-- Select Status --</option>
+									<option value="0" <?php echo array_key_exists('intStatus', $model) ? $model["intStatus"] == 0 ? "selected": "" : "" ;?>>Inactive</option>
+									<option value="1" <?php echo array_key_exists('intStatus', $model) ? $model["intStatus"] == 1 ? "selected": "" : "" ; ?> >Active</option>
+								</select>
+					
+							</div>
+						</div>
+					</fieldset>
+					<fieldset>
+						<legend>Access</legend>
+						<table class="table beauty-table table-hover">					
+						<tbody>
+							<tr>
+								<td><div class="checkbox-inline">
+											<label>
+												<input type="checkbox" id="entity" name="entity" checked> Entity
+												<i class="fa fa-square-o "></i>
+											</label>
+										</div></td>
+								<td>
+									<div class="checkbox-inline">
+											<label>
+												<input type="checkbox" id="entity" name="entity" checked> Entity Profile
+												<i class="fa fa-square-o "></i>
+											</label>
+										</div>
+								</td>
+								<td>
+									
+										<div class="checkbox-inline">
+											<label>
+												<input type="checkbox" checked name="entity[view]" value="view"> View
+												<i class="fa fa-square-o small"></i>
+											</label>
+										</div>
+										<div class="checkbox-inline">
+											<label>
+												<input type="checkbox" checked name="entity[add]" value="add"> Add
+												<i class="fa fa-square-o small"></i>
+											</label>
+										</div>
+										<div class="checkbox-inline">
+											<label>
+												<input type="checkbox" checked name="entity[edit]" value="edit"> Edit
+												<i class="fa fa-square-o small"></i>
+											</label>
+										</div>
+										<div class="checkbox-inline">
+											<label>
+												<input type="checkbox" checked name="entity[delete]" value="delete"> Delete
+												<i class="fa fa-square-o small"></i>
+											</label>
+										</div>
+									
+								</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td>
+									<div class="checkbox-inline">
+											<label>
+												<input type="checkbox" checked>Module Activation
+												<i class="fa fa-square-o "></i>
+											</label>
+										</div>
+								</td>
+								<td>
+									
+										<div class="checkbox-inline">
+											<label>
+												<input type="checkbox" checked> View
+												<i class="fa fa-square-o small"></i>
+											</label>
+										</div>
+										<div class="checkbox-inline">
+											<label>
+												<input type="checkbox" checked> Add
+												<i class="fa fa-square-o small"></i>
+											</label>
+										</div>
+										<div class="checkbox-inline">
+											<label>
+												<input type="checkbox" checked> Edit
+												<i class="fa fa-square-o small"></i>
+											</label>
+										</div>
+										<div class="checkbox-inline">
+											<label>
+												<input type="checkbox" checked> Delete
+												<i class="fa fa-square-o small"></i>
+											</label>
+										</div>
+									
+								</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td><div class="checkbox-inline">
+											<label>
+												<input type="checkbox" checked>Billing & Invoicing
+												<i class="fa fa-square-o "></i>
+											</label>
+										</div></td>
+								<td>
+									
+										<div class="checkbox-inline">
+											<label>
+												<input type="checkbox" checked> View
+												<i class="fa fa-square-o small"></i>
+											</label>
+										</div>
+										<div class="checkbox-inline">
+											<label>
+												<input type="checkbox" checked> Add
+												<i class="fa fa-square-o small"></i>
+											</label>
+										</div>
+										<div class="checkbox-inline">
+											<label>
+												<input type="checkbox" checked> Edit
+												<i class="fa fa-square-o small"></i>
+											</label>
+										</div>
+										<div class="checkbox-inline">
+											<label>
+												<input type="checkbox" checked> Delete
+												<i class="fa fa-square-o small"></i>
+											</label>
+										</div>
+									
+								</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td><div class="checkbox-inline">
+											<label>
+												<input type="checkbox" checked>User Master
+												<i class="fa fa-square-o "></i>
+											</label>
+										</div></td>
+								<td>
+									
+										<div class="checkbox-inline">
+											<label>
+												<input type="checkbox" checked> View
+												<i class="fa fa-square-o small"></i>
+											</label>
+										</div>
+										<div class="checkbox-inline">
+											<label>
+												<input type="checkbox" checked> Add
+												<i class="fa fa-square-o small"></i>
+											</label>
+										</div>
+										<div class="checkbox-inline">
+											<label>
+												<input type="checkbox" checked> Edit
+												<i class="fa fa-square-o small"></i>
+											</label>
+										</div>
+										<div class="checkbox-inline">
+											<label>
+												<input type="checkbox" checked> Delete
+												<i class="fa fa-square-o small"></i>
+											</label>
+										</div>
+									
+								</td>
+							</tr>
+						</tbody>
+				</table>
+					</fieldset>
+				</div>			
+			</div>
+		</div>
+		
+		
+		<div class="col-xs-12 col-sm-12">
+			<div class="form-group" style="text-align: left;padding: 0 15px;">
+				<button type="cancel" class="btn btn-default btn-label-left"><span><i class="fa fa-clock-o txt-danger"></i></span>Cancel</button>
+				<button type="submit" class="btn btn-primary btn-label-left"><span><i class="fa fa-clock-o"></i></span>Submit</button>
+			</div>
+		</div>
+	</form>
+</div>
+<script type="text/javascript">
+    $(document).ready(function() {
+      
+        $.validator.addMethod("valueNotEquals", function(value, element, arg){
+            return arg != value;
+        }, "Please select an option");
+        $('#defaultForm').validate({
+            rules: {
+                strName: {
+                    required: true,
+                    maxlength: 200
+                },
+				strLoginId: {
+                    required: true,
+                    maxlength: 200
+                },
+				strEmail : {
+                    required: true,
+                    maxlength: 200
+                },
+            },
+            errorPlacement: function(error, element) {
+                error.appendTo(element.parent());
+            }
+        });
+		
+		LoadSelect2Script(DemoSelect2);
+    });
+	
+	// Run Select2 plugin on elements
+	function DemoSelect2(){
+		$('#intStatus').select2();
+		$('#idEntity').select2();		
+	}
+
+</script>

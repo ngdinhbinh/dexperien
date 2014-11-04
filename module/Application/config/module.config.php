@@ -16,6 +16,9 @@ return array(
             'Application\Controller\UserType' => 'Application\Controller\UserTypeController',
 			'Application\Controller\Auth' => 'Application\Controller\AuthController',
 			'Application\Controller\Success' => 'Application\Controller\SuccessController',
+			'Application\Controller\Entity' => 'Application\Controller\EntityController',
+			'Application\Controller\Module' => 'Application\Controller\ModuleController',
+			'Application\Controller\EntityUser' => 'Application\Controller\EntityUserController',
         ),
     ),
     'router' => array(

@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS `tblentity` (
   `strGoogleUserId` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
   `strGoogleTokenId` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`idEntity`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `tblentity`

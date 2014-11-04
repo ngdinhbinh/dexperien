@@ -16,8 +16,10 @@ use Zend\Mvc\MvcEvent;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Application\Model\EntityUserAccessTable;
+use Application\Model\EntityTable;
+use Application\Model\ModuleTable;
 use Application\Model\UserTypeTable;
-
+use Application\Model\EntityUserTable;
 use Zend\Authentication\AuthenticationService;
 use Zend\Authentication\Adapter\DbTable as DbTableAuthAdapter;
 
@@ -59,6 +61,21 @@ class Module implements AutoloaderProviderInterface
     {
         return array(
             'factories' => array(
+				'Application\Model\EntityTable' =>  function($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $table = new EntityTable($dbAdapter);
+                    return $table;
+                },
+				'Application\Model\ModuleTable' =>  function($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $table = new ModuleTable($dbAdapter);
+                    return $table;
+                },
+				'Application\Model\EntityUserTable' =>  function($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $table = new EntityUserTable($dbAdapter);
+                    return $table;
+                },
                 'Application\Model\EntityUserAccessTable' =>  function($sm) {
                     $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
                     $table = new EntityUserAccessTable($dbAdapter);
