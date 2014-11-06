@@ -49,6 +49,16 @@ class EntityUserTable extends AbstractTableGateway implements ServiceLocatorAwar
         return $resultSet;
     }
 	
+	public function getData($idEntity, $idUser )
+    {
+		if($idUser == NULL)
+			$resultSet = $this->select(array("idEntity" => $idEntity));
+		else
+			$resultSet = $this->select(array("idUser" => $idUser));
+			
+        $resultSet = $resultSet->toArray();
+        return $resultSet;
+    }
 	
     public function getItem($id)
     {
@@ -60,6 +70,14 @@ class EntityUserTable extends AbstractTableGateway implements ServiceLocatorAwar
 		}
         return $row;
     }	
+	public function checkIsSupperAdmin($strLoginId){		
+        $rowset = $this->select(array('strLoginId' => $strLoginId));
+        $row = $rowset->current();
+		if (!$row) {
+            $row = array();
+		}
+        return $row;
+	}
     public function saveItem($data)
     {
         $idUser = (int)$data["idUser"];

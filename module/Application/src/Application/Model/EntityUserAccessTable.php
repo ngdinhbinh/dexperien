@@ -44,18 +44,9 @@ class EntityUserAccessTable extends AbstractTableGateway implements ServiceLocat
 
     public function fetchAll()
     {
-        $cache = $this->getServiceLocator()->get('cache');
-        // set unique Cache key
-        $key = $this->getKeyAll();
-        // get the Cache data
-        $resultSet = $cache->getItem($key, $success);
-        if (!$success) {
-        // if not set the data for next request
-            $resultSet = $this->select();
-            $resultSet =$resultSet->toArray();
-            $cache->setItem($key, $resultSet);
-            $cache->setTags(self::KEYALL,array($key));
-        }
+        $resultSet = $this->select();
+        $resultSet =$resultSet->toArray();
+            
         return $resultSet;
     }
 	
@@ -63,8 +54,8 @@ class EntityUserAccessTable extends AbstractTableGateway implements ServiceLocat
     {
 		$sql = new Sql($this->adapter);
 		$select = $sql->select();
-		$select->from(array('f' => 'tblentityuseraccess'))->join(array('b' => 'tblmodule'), 'f.idModule = b.idModule');		
-		$select->where('idUser = 1');
+		$select->from(array('f' => 'tblentityuseraccess'))->join(array('b' => 'tblmodule'), 'f.idModule = b.idModule')->join(array('c' => 'tblentityuser'), 'c.idUser = f.idUser');		
+		$select->where(array('strLoginId' => $strLoginId));
 		
 		$resultSet = $this->selectWith($select);
 		$result = $resultSet->toArray();		
@@ -74,6 +65,18 @@ class EntityUserAccessTable extends AbstractTableGateway implements ServiceLocat
     {   	
 		$resultSet = $this->select(array('idUser' => $idUser, 'idModule' => $idModule));       
         return $resultSet;
+    }
+	public function chkAccessright($idUser, $strModuleUrl)
+    {   	
+		$sql = new Sql($this->adapter);
+		$select = $sql->select();
+		$select->from(array('f' => 'tblentityuseraccess'))->join(array('b' => 'tblmodule'), 'f.idModule = b.idModule')->join(array('c' => 'tblentityuser'), 'c.idUser = f.idUser');		
+		$select->where(array('c.idUser' => $idUser, "strModuleUrl" => $strModuleUrl));	
+		
+		$resultSet = $this->selectWith($select);
+		
+		$result = $resultSet->toArray();		
+		return $result;
     }
     public function getItem($id)
     {
@@ -122,9 +125,9 @@ class EntityUserAccessTable extends AbstractTableGateway implements ServiceLocat
             $cache->clearByTags($cache->getTags(self::KEYALL));
         $this->fetchAll();
     }
-	public function deleteAll($idUser)
+	public function deleteAll($idUser, $idModule)
     {
-        $this->delete(array('idUser' => $idUser));
+        $this->delete(array('idUser' => $idUser, 'idModule' => $idModule ));
              
         $this->fetchAll();
     }

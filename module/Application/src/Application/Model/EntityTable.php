@@ -44,18 +44,9 @@ class EntityTable extends AbstractTableGateway implements ServiceLocatorAwareInt
 
     public function fetchAll()
     {
-        //$cache = $this->getServiceLocator()->get('cache');
-        // set unique Cache key
-       // $key = $this->getKeyAll();
-        // get the Cache data
-        //$resultSet = $cache->getItem($key, $success);
-        //if (!$success) {
-        // if not set the data for next request
-            $resultSet = $this->select();
-            $resultSet =$resultSet->toArray();
-            //$cache->setItem($key, $resultSet);
-            //$cache->setTags(self::KEYALL,array($key));
-       // }
+        $resultSet = $this->select();
+        $resultSet =$resultSet->toArray();
+         
         return $resultSet;
     }
 	
@@ -63,13 +54,6 @@ class EntityTable extends AbstractTableGateway implements ServiceLocatorAwareInt
     public function getItem($id)
     {
         $id  = (int) $id;
-        //$cache = $this->getServiceLocator()->get('cache');
-        // set unique Cache key
-        //$key = $this->getKeyID($id);
-        // get the Cache data
-
-        //$row = $cache->getItem($key, $success);
-        //if (!$success) {
             $rowset = $this->select(array('idEntity' => $id));
             $row = $rowset->current();
             if (!$row) {

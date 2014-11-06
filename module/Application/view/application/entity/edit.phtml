@@ -162,7 +162,7 @@
 								
 								<div class="toggle-switch ">
 									<label>
-										<input type="checkbox" <?php echo $model["intDXPEmailGateway"] == 1 ? "checked": "" ?> name="intDXPEmailGateway">
+										<input type="checkbox" <?php echo array_key_exists('intDXPEmailGateway', $model) ? $model["intDXPEmailGateway"] == 1 ? "checked": "" : "" ?> name="intDXPEmailGateway">
 										<div class="toggle-switch-inner"></div>
 										<div class="toggle-switch-switch"><i class="fa fa-check"></i></div>
 									</label>
@@ -209,7 +209,7 @@
 								
 								<div class="toggle-switch">
 									<label>
-										<input type="checkbox" name="intDXPSMSGateway" <?php echo $model["intDXPSMSGateway"] == 1 ? "checked": "" ?>>
+										<input type="checkbox" name="intDXPSMSGateway" <?php echo array_key_exists('intDXPSMSGateway', $model) ? $model["intDXPSMSGateway"] == 1 ? "checked": "" : "" ?>>
 										<div class="toggle-switch-inner"></div>
 										<div class="toggle-switch-switch"><i class="fa fa-check"></i></div>
 									</label>

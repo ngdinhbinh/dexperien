@@ -5,7 +5,18 @@
     else
         $page_function = 'Add';
 	$this->headTitle($page_title.' '.$page_function);
-
+	
+	//check access right
+	$rightView = 0;
+	$rightAdd = 0;
+	$rightEdit = 0;
+	$rightDel = 0;
+	foreach($accessRight as $access):
+		$rightView  = (int)$access["intView"];
+		$rightAdd  = (int)$access["intAdd"];
+		$rightEdit  = (int)$access["intEdit"];
+		$rightDel  = (int)$access["intDelete"];
+	endforeach;
 ?>
 <div class="row">
     <div id="breadcrumb" class="col-xs-12">
@@ -26,8 +37,10 @@
 	<form id="defaultForm" action="<?php  echo $this->basePath() ?>/entity-user/save" method="post" class="form-horizontal">
 		<div class="col-xs-12 col-sm-12">
 			<div class="form-group" style="text-align: right;padding: 0 15px;">
-				<button type="cancel" class="btn btn-default btn-label-left"><span><i class="fa fa-clock-o txt-danger"></i></span>Cancel</button>
+				<a href="<?php  echo $this->basePath() ?>/entity-user" class="btn btn-default btn-label-left"><span><i class="fa fa-clock-o txt-danger"></i></span>Cancel</a>
+				<?php if($rightAdd == 1 && $rightEdit == 1): ?>
 				<button type="submit" class="btn btn-primary btn-label-left"><span><i class="fa fa-clock-o"></i></span>Submit</button>
+				<?php endif ?>
 			</div>
 		</div>
 		<div class="col-xs-12 col-sm-12">
@@ -128,10 +141,28 @@
 									<option value="0" <?php echo array_key_exists('intStatus', $model) ? $model["intStatus"] == 0 ? "selected": "" : "" ;?> >Inactive</option>
 									<option value="1" <?php echo array_key_exists('intStatus', $model) ? $model["intStatus"] == 1 ? "selected": "" : "" ; ?> >Active</option>
 								</select>
-					
 							</div>
 						</div>
+						<?php  $chkUserType = (int)$UserType; if($chkUserType != 2):?>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">Is Supper Admin</label>
+								<div class="col-sm-5">
+									<select id="intUserType" name="intUserType" class="populate placeholder">		
+											<option value="-1">-- Select Status --</option>
+											<?php if($chkUserType == 0): ?>
+											<option value="0" <?php echo array_key_exists('intUserType', $model) ? $model["intUserType"] == 0 ? "selected": "" : "" ;?> >Supper Admin</option>
+											<?php endif; ?>
+											<?php if($chkUserType == 0 || $chkUserType == 1): ?>
+											<option value="1" <?php echo array_key_exists('intUserType', $model) ? $model["intUserType"] == 1 ? "selected": "" : "" ; ?> >Entity Admin</option>
+											<?php endif; ?>
+											<option value="2" <?php echo array_key_exists('intUserType', $model) ? $model["intUserType"] == 2 ? "selected": "" : "" ; ?> >Enity</option>
+									</select>
+								</div>								
+							</div>
+						<?php endif; ?>
+						
 					</fieldset>
+			<?php if($chkUserType != 2): ?>
 					<fieldset>
 						<legend>Access</legend>
 						<input type="hidden" name="access" id="access" /><br />
@@ -223,13 +254,16 @@
 							endforeach;
 						 ?>
 					</fieldset>
+			<?php endif; ?>
 				</div>			
 			</div>
 		</div>
 		<div class="col-xs-12 col-sm-12">
 			<div class="form-group" style="text-align: left;padding: 0 15px;">
-				<button type="cancel" class="btn btn-default btn-label-left"><span><i class="fa fa-clock-o txt-danger"></i></span>Cancel</button>
+				<a href="<?php  echo $this->basePath() ?>/entity-user" class="btn btn-default btn-label-left"><span><i class="fa fa-clock-o txt-danger"></i></span>Cancel</a>
+				<?php if($rightAdd == 1 && $rightEdit == 1): ?>
 				<button type="submit" class="btn btn-primary btn-label-left"><span><i class="fa fa-clock-o"></i></span>Submit</button>
+				<?php endif; ?>
 			</div>
 		</div>
 	</form>
@@ -265,7 +299,9 @@
 	// Run Select2 plugin on elements
 	function DemoSelect2(){
 		$('#intStatus').select2();
-		$('#idEntity').select2();		
+		$('#idEntity').select2();	
+		$('#intUserType').select2();	
+		
 	}
 
 </script>

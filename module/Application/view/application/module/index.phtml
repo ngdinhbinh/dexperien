@@ -43,36 +43,24 @@
                 <table class="table table-bordered table-striped table-hover table-heading table-datatable" id="datatable-1">
                     <thead>
                         <tr>
-							<th>Sort</th>
+							
                             <th>Module Name</th>
 						    <th>Module URL</th>
-							<th>Module Parent</th>
+						    <th>Active</th>
 						    
-						    <th></th>
                         </tr>
                     </thead>
                     <tbody>
                 	<!-- Start: list_row -->
                 	<?php foreach($data as $item) : ?>
-						<tr class="table-body">
-							<td class="table-body-row name column-left"><?php echo $this->escapeHtml($item["intSort"]);?></td>
+						<tr class="table-body">							
 						    <td class="table-body-row name column-left">
 								<a  rel="tooltip" data-placement="top" data-original-title=" Edit " href="<?php echo $this->url('home/default', array('controller'=>'module','action' => 'edit', 'id' => $item["idModule"] )) ?>">
 									<?php echo $this->escapeHtml($item["strModuleName"]);?>
 								</a>
 							</td>
-							<td class="table-body-row name column-left"><?php echo $this->escapeHtml($item["strModuleUrl"]);?></td>
-						    <td class="table-body-row name column-left"><?php echo $this->escapeHtml($item["intModuleParent"]);?></td>
-							
-						    <td class="table-body-row last-column">
-						    	<div class="btn-group btn-control"> 
-	                                <a class="btn btn-default edit" rel="tooltip" data-placement="top" data-original-title=" Edit " href="<?php echo $this->url('home/default', array('controller'=>'module','action' => 'edit', 'id' => $item["idModule"] )) ?>">
-	                                    Edit
-	                                </a>
-	                                <a class="btn btn-default delete" rel="tooltip" data-placement="top" data-original-title=" Delete " href="<?php echo $this->url('home/default', array('controller'=>'module','action' => 'delete', 'id' => $item["idModule"] )) ?>">Delete
-	                                </a>
-	                            </div>
-						    </td>
+							<td class="table-body-row name column-left"><?php echo $this->escapeHtml($item["strModuleUrl"]);?></td>						    
+							<td class="table-body-row name column-left"><?php echo $this->escapeHtml($item["intActive"]);?></td>						   
 						</tr>
 					<?php endforeach; ?>
                     <!-- End: list_row -->

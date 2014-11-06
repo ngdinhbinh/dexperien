@@ -45,16 +45,18 @@ class ModuleTable extends AbstractTableGateway implements ServiceLocatorAwareInt
     public function fetchAll()
     {      
 		$resultSet = $this->select(function (Select $select){
-			$select->columns(array('idModule', 'strModuleName', 'strModuleUrl','intModuleParent','intSort')); 			
+		$select->columns(array('idModule', 'strModuleName', 'strModuleUrl','intModuleParent','intSort','intActive')); 			
 			$select->order('intSort ASC'); 
 		});       
         return $resultSet;
+		
+
     }
 	public function selectRootModule()
     {      
 		$resultSet = $this->select(function (Select $select){
 			$select->columns(array('idModule', 'strModuleName', 'strModuleUrl','intModuleParent','intSort')); 	
-			$select->where("intModuleParent is NULL"); 				
+			$select->where("intModuleParent is NULL and intActive = 1"); 				
 			$select->order('intSort ASC'); 
 		});       
         return $resultSet;
@@ -62,7 +64,7 @@ class ModuleTable extends AbstractTableGateway implements ServiceLocatorAwareInt
 	public function selectChildModule($id)
     {      
 		$id  = (int) $id;		
-		$resultSet = $this->select(array('intModuleParent' => $id));       
+		$resultSet = $this->select(array('intModuleParent' => $id, "intActive" => 1));       
         return $resultSet;
     }
 	
