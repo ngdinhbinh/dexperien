@@ -29,9 +29,14 @@ class ModuleController extends AbstractActionController
         $renderer->HeadScript()->appendFile($renderer->basePath() . '/js/index.js','text/javascript');
         return new ViewModel(array(
             'data' => $this->getModuleTable()->fetchAll(),
+			'data_module_root' => $this->getModuleTable()->selectRootModuleAll(),
+			'this_controller' => $this,
         ));
     }
-
+	public function getChildModuleAction($intParentModule){
+		$arr = $this->getModuleTable()->selectChildModuleAll($intParentModule);
+		return $arr;
+	}
     public function editAction()
     {
         $id = (int)$this->params('id');
@@ -47,18 +52,21 @@ class ModuleController extends AbstractActionController
 		
         $request = $this->getRequest();
         if ($request->isPost()) {
-            $formData = ($request->getPost());           
+            $formData = ($request->getPost());        
 			
-            $data= array(
-                "idModule"=>$request->getPost("idModule"),
-                "strModuleName"=>$request->getPost("strModuleName"),
-				"strIDNo"=>$request->getPost("strIDNo"),
-				"strModuleUrl"=>$request->getPost("strModuleUrl"),
-				"intModuleParent"=>$request->getPost("intModuleParent"),
-				"intSort"=>$request->getPost("intSort")
-            );
-            
-            $this->getModuleTable()->saveItem($data);
+			$access = $request->getPost("access");	
+			$access = json_decode($access);		
+			foreach($access as $key=>$val){ 
+				$idModule = $key;
+				$intActive = $val;
+				
+				$data= array(
+					"idModule"=>$idModule,
+					"intActive"=>$intActive
+				);
+				
+				 $this->getModuleTable()->saveItem($data);
+			}
 
             return $this->redirect()->toRoute('home/default', array(
                 'controller' => 'module'

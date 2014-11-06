@@ -108,10 +108,9 @@ class EntityUserController extends AbstractActionController
 				"strLastModBy"=>$loginName,
 				"dtLastModDate"=>$request->getPost("dtLastModDate")
             );
-			if($request->getPost("intUserType")){
+			
 				$data["intUserType"] = $request->getPost("intUserType");
-			}else
-				$data["intUserType"] = 2;
+		
 				
 			$password = $request->getPost("strPassword");
 			if(strlen(trim($password)) > 0)

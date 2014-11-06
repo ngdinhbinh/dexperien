@@ -12,14 +12,22 @@
         </ol>
     </div>
 </div>
+<style type="text/css">
+	.table{margin-bottom:0;}
+	.table.beauty-table.table-hover tr td{width:300px;}
+	.table.beauty-table.table-hover tr td:first-child{width:200px;}
+	.table.beauty-table.table-hover tr td:last-child{width:500px;}
+</style>
 <div class="row">
     <div class="col-xs-12">
-         <div class="toolbar">
-            <div class="pull-right">
-                <a id="addItem" class="btn-add btn btn-default" href="<?php echo $this->basePath() . "/module/edit/id/0"; ?>">Add</a>
-            </div>
-            <div class="clearfix"></div>
-        </div>
+        <form id="defaultForm" action="<?php  echo $this->basePath() ?>/module/save" method="post" class="form-horizontal"> 
+			<div class="form-group" style="text-align: right;padding: 0 15px;">
+				<a href="<?php  echo $this->basePath() ?>/entity-user" class="btn btn-default btn-label-left"><span><i class="fa fa-clock-o txt-danger"></i></span>Cancel</a>
+				
+				<button type="submit" class="btn btn-primary btn-label-left"><span><i class="fa fa-clock-o"></i></span>Submit</button>
+				
+			</div>
+		
         <div class="box">
             <div class="box-header">
                 <div class="box-name">
@@ -40,44 +48,75 @@
                 <div class="no-move"></div>
             </div>
             <div class="box-content no-padding">
-                <table class="table table-bordered table-striped table-hover table-heading table-datatable" id="datatable-1">
-                    <thead>
-                        <tr>
+                
+				
+				<fieldset>
+						<input type="hidden" name="access" id="access" /><br />
+						<input type="hidden" name="idUser" id="idUser" value="<?php echo array_key_exists('idUser', $model) ? ($model["idUser"]) : "0" ?>" /><br />
+					<table class="table beauty-table table-hover">	
+							<tbody>
+							<tr>
+							<td><h3>Module Parent</h3></td>
 							
-                            <th>Module Name</th>
-						    <th>Module URL</th>
-						    <th>Active</th>
-						    
-                        </tr>
-                    </thead>
-                    <tbody>
-                	<!-- Start: list_row -->
-                	<?php foreach($data as $item) : ?>
-						<tr class="table-body">							
-						    <td class="table-body-row name column-left">
-								<a  rel="tooltip" data-placement="top" data-original-title=" Edit " href="<?php echo $this->url('home/default', array('controller'=>'module','action' => 'edit', 'id' => $item["idModule"] )) ?>">
-									<?php echo $this->escapeHtml($item["strModuleName"]);?>
-								</a>
+							<td><h3> Active for Entity User</h3></td>
+							</tr>
+							</tbody>
+							
+					</table>
+						 <?php 
+							foreach($data_module_root as $itemRoot) : 
+								$moduleID = $itemRoot["idModule"];
+								$moduleName = $itemRoot["strModuleName"];
+								$moduleURL = $itemRoot["strModuleUrl"];
+								$tblChildrenModule = $this_controller->getChildModuleAction($moduleID);
+						?>
+						<table class="table beauty-table table-hover">	
+							<tbody>
+						<?php
+								$i = 1;
+								foreach($tblChildrenModule as $itemChilren):
+									$childModuleID = $itemChilren["idModule"];
+									$childModuleName = $itemChilren["strModuleName"];
+									$childModuleURL = $itemChilren["strModuleUrl"];
+									$intActive = (int)$itemChilren["intActive"];
+									
+						?>
+							<tr>
+							<td>
+							<?php if($i == 1) { ?>
+								<div class="checkbox-inline">
+									 <label>
+									 <input type="checkbox" id="<?php echo $moduleID ;?>" name="<?php echo $moduleID ;?>" class="level1"> <?php echo $moduleName; ?>
+									 <i class="fa fa-square-o "></i>
+									 </label>
+								</div>
+							<?php } ?>
 							</td>
-							<td class="table-body-row name column-left"><?php echo $this->escapeHtml($item["strModuleUrl"]);?></td>						    
-							<td class="table-body-row name column-left"><?php echo $this->escapeHtml($item["intActive"]);?></td>						   
-						</tr>
-					<?php endforeach; ?>
-                    <!-- End: list_row -->
-                    </tbody>
-                    <tfoot>
-                        <tr>
-							<th>Module Name</th>
-						    <th>Module URL</th>
-							<th>Module Parent</th>
-						    <th>Sort</th>
-						    <th></th>
-                        </tr>
-                    </tfoot>
-                </table>
+							   <td>
+								  <div class="checkbox-inline">
+									 <label>
+									 <input type="checkbox" name="<?php echo $childModuleID; ?>" id="<?php echo $childModuleID; ?>" <?php echo $intActive == 1 ? "checked": ""; ?> class="level2"> <?php echo $childModuleName; ?>
+									 <i class="fa fa-square-o "></i>
+									 </label>
+								  </div>
+							   </td>
+							   
+							</tr>
+						<?php
+									$i++;
+								endforeach;
+						?>
+							</tbody>
+						</table>	
+							
+						<?php											
+							endforeach;
+						 ?>
+					</fieldset>
                 </div>
         </div>
     </div>
+	</form>
 </div>
 
 
@@ -102,3 +141,104 @@ $(document).ready(function() {
     WinMove();
 });
 </script>
+
+<script type="text/javascript">
+         $(document).ready(function(){
+         	$(".btn-primary").click(function(){
+         		var accessModule = "{";
+				var chkbox = $("table.table").find("input[type='checkbox']");
+         		var countAccess = $(chkbox).length;			
+         		var i = 1;
+				
+         		$(chkbox).each(function(){
+					var moduleId = $(this).attr("id");
+					var chk = $(this).is(":checked");
+					var intActive = 0;
+					if(chk)
+						intActive = 1;
+         			var accessThisModule = "\"" + moduleId + "\" : \"" + intActive + "\" ";
+         			if(i < countAccess) accessThisModule = accessThisModule + " , ";
+         			accessModule = accessModule + accessThisModule;
+         			i = i + 1;
+         		})
+         		accessModule = accessModule + "}";			
+         		$("#access").val(accessModule);
+				
+         	})
+         	$("input[type='checkbox'].level1").click(function(){
+         		var chk = $(this).is(":checked");
+         		var children = $(this).parent("label").parent("div").parent("td").parent("tr").parent("tbody").find("input[type='checkbox']");			
+         		$(children).prop('checked', chk);
+         	});
+         	$("input[type='checkbox'].level2").click(function(){
+         		var chk = $(this).is(":checked");
+         		var children = $(this).parent("label").parent("div").parent("td").parent("tr").find("input[type='checkbox']:not('.level1')");			
+         		$(children).prop('checked', chk);
+				//check if not all level1 checked then the parent not check
+				var level2 = $(this).parent("label").parent("div").parent("td").parent("tr").parent("tbody").find("input[type='checkbox'].level2");	
+				var level1 = $(this).parent("label").parent("div").parent("td").parent("tr").parent("tbody").find("input[type='checkbox'].level1");				
+				var chklevel1 = true;
+				$(level2).each(function(){					
+         			var chkThis = $(this).is(":checked") ? true : false;	
+					if(!chkThis) { 
+						chklevel1 = false; 
+					}
+         		});
+				$(level1).prop('checked', chklevel1);						
+         	});
+			$("td.access input[type='checkbox']").click(function(){
+				var level2 = $(this).parent("label").parent("div").parent("td").parent("tr").find("input[type='checkbox'].level2");	
+				var level1 = $(this).parent("label").parent("div").parent("td").parent("tr").parent("tbody").find("input[type='checkbox'].level1");	
+				var chk = $(this).is(":checked");
+				if(!chk){
+					$(level2).prop('checked',false);
+					$(level1).prop('checked',false);
+				}else{
+					var thislevel = $(this).parent("label").parent("div").parent("td").find("input[type='checkbox']");
+					var chklevel1 = true;
+					$(thislevel).each(function(){					
+						var chkThis = $(this).is(":checked") ? true : false;	
+						if(!chkThis) { 
+							chklevel1 = false; 
+						}
+					});	
+					$(level2).prop('checked',chklevel1);					
+					//check level1
+					var thislevel = $(this).parent("label").parent("div").parent("td").parent("tr").parent("tbody").find("input[type='checkbox'].level3");
+					var chklevel1 = true;
+					$(thislevel).each(function(){					
+						var chkThis = $(this).is(":checked") ? true : false;	
+						if(!chkThis) { 
+							chklevel1 = false; 
+						}
+					});	
+					$(level1).prop('checked',chklevel1);	
+				}
+			});
+         })
+		 
+      </script>
+	  <script type="text/javascript">
+		$(document).ready(function(){
+			$("td.access").each(function(){
+				var eLevel2 = $(this).prev("td").find("input[type='checkbox'].level2");
+				var chkLevel2 = true;
+				$(this).find('input[type="checkbox"]').each(function(){
+					var thisCheck = $(this).is(":checked");		
+					if(!thisCheck)
+						chkLevel2 = false;
+				});
+				$(eLevel2).prop("checked",chkLevel2);
+			});
+			$("table.table").each(function(){
+				var eLevel1 = $(this).find("input[type='checkbox'].level1");
+				var chkLevel1 = true;
+				$(this).find('input[type="checkbox"].level2').each(function(){
+					var thisCheck = $(this).is(":checked");		
+					if(!thisCheck)
+						chkLevel1 = false;
+				});
+				$(eLevel1).prop("checked",chkLevel1);
+			})
+		})
+	  </script>

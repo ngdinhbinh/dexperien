@@ -143,7 +143,7 @@
 								</select>
 							</div>
 						</div>
-						<?php  $chkUserType = (int)$UserType; if($chkUserType != 2):?>
+						<?php  $chkUserType = (int)$UserType;?>
 							<div class="form-group">
 								<label class="col-sm-3 control-label">Is Supper Admin</label>
 								<div class="col-sm-5">
@@ -155,11 +155,13 @@
 											<?php if($chkUserType == 0 || $chkUserType == 1): ?>
 											<option value="1" <?php echo array_key_exists('intUserType', $model) ? $model["intUserType"] == 1 ? "selected": "" : "" ; ?> >Entity Admin</option>
 											<?php endif; ?>
+											<?php if($chkUserType == 0 || $chkUserType == 1 || $chkUserType == 2) : ?>
 											<option value="2" <?php echo array_key_exists('intUserType', $model) ? $model["intUserType"] == 2 ? "selected": "" : "" ; ?> >Enity</option>
+											<?php endif; ?>
 									</select>
 								</div>								
 							</div>
-						<?php endif; ?>
+						
 						
 					</fieldset>
 			<?php if($chkUserType != 2): ?>

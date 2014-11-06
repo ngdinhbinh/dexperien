@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 06, 2014 at 07:10 PM
+-- Generation Time: Nov 06, 2014 at 08:06 PM
 -- Server version: 5.5.39
 -- PHP Version: 5.4.31
 
@@ -101,7 +101,7 @@ CREATE TABLE IF NOT EXISTS `tblentityuser` (
 --
 
 INSERT INTO `tblentityuser` (`idUser`, `idEntity`, `strLoginId`, `strName`, `strEmail`, `strMobileNo`, `strAndroidId`, `striOSId`, `strPassword`, `intStatus`, `strCreateBy`, `dtCreateDate`, `strLastModBy`, `dtLastModDate`, `intUserType`) VALUES
-(1, 1, 'admin', 'Administrator', 'binhk32xp@gmail.com', '84907668625', '1900', '1900', '21232f297a57a5a743894a0e4a801fc3', 0, 'admin', NULL, 'admin', NULL, 0),
+(1, 1, 'admin', 'Supper Admin', 'binhk32xp@gmail.com', '84907668625', '1900', '1900', '21232f297a57a5a743894a0e4a801fc3', 0, 'admin', NULL, 'admin', NULL, 0),
 (5, 2, 'chinh', 'nmc0987', 'nmc0987', '0907668625', '1900', '1080', '21232f297a57a5a743894a0e4a801fc3', 0, 'nmc0987', NULL, 'nmc0987', NULL, 1),
 (7, 2, 'binh', 'binh nguyen', 'binhk32xp@gmail.com', '+84907668625', '1004', '1004', '21232f297a57a5a743894a0e4a801fc3', 0, 'chinh', NULL, 'chinh', NULL, 2);
 
@@ -122,7 +122,7 @@ CREATE TABLE IF NOT EXISTS `tblentityuseraccess` (
   `intAdd` int(11) DEFAULT NULL,
   `intDelete` int(11) DEFAULT NULL,
   `intEdit` int(11) DEFAULT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1230 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1242 ;
 
 --
 -- Dumping data for table `tblentityuseraccess`
@@ -175,7 +175,19 @@ INSERT INTO `tblentityuseraccess` (`idUserAccess`, `idUser`, `idModule`, `intAcc
 (1226, 7, 2, 1, 'chinh', '2014-11-06 19:00:10', 1, 1, 1, 1),
 (1227, 7, 3, 1, 'chinh', '2014-11-06 19:00:10', 1, 1, 1, 1),
 (1228, 7, 4, 1, 'chinh', '2014-11-06 19:00:10', 1, 1, 1, 1),
-(1229, 7, 5, 1, 'chinh', '2014-11-06 19:00:10', 1, 1, 1, 1);
+(1229, 7, 5, 1, 'chinh', '2014-11-06 19:00:10', 1, 1, 1, 1),
+(1230, 1, 2, 1, 'admin', '2014-11-06 19:17:55', 1, 1, 1, 1),
+(1231, 1, 4, 1, 'admin', '2014-11-06 19:17:55', 1, 1, 1, 1),
+(1232, 1, 5, 1, 'admin', '2014-11-06 19:17:55', 1, 1, 1, 1),
+(1233, 1, 2, 1, 'admin', '2014-11-06 19:20:42', 1, 1, 1, 1),
+(1234, 1, 4, 1, 'admin', '2014-11-06 19:20:42', 1, 1, 1, 1),
+(1235, 1, 5, 1, 'admin', '2014-11-06 19:20:42', 1, 1, 1, 1),
+(1236, 1, 2, 1, 'admin', '2014-11-06 19:24:20', 1, 1, 1, 1),
+(1237, 1, 4, 1, 'admin', '2014-11-06 19:24:20', 1, 1, 1, 1),
+(1238, 1, 5, 1, 'admin', '2014-11-06 19:24:21', 1, 1, 1, 1),
+(1239, 1, 2, 1, 'admin', '2014-11-06 19:24:52', 1, 1, 1, 1),
+(1240, 1, 4, 1, 'admin', '2014-11-06 19:24:52', 1, 1, 1, 1),
+(1241, 1, 5, 1, 'admin', '2014-11-06 19:24:52', 1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -190,7 +202,7 @@ CREATE TABLE IF NOT EXISTS `tblmodule` (
   `intModuleParent` int(11) DEFAULT NULL,
   `intSort` int(11) DEFAULT NULL,
   `intActive` int(11) DEFAULT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=38 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=74 ;
 
 --
 -- Dumping data for table `tblmodule`
@@ -199,15 +211,15 @@ CREATE TABLE IF NOT EXISTS `tblmodule` (
 INSERT INTO `tblmodule` (`idModule`, `strModuleName`, `strModuleUrl`, `intModuleParent`, `intSort`, `intActive`) VALUES
 (1, 'Entity', 'entity', NULL, 1, 1),
 (2, 'Entity Profile', 'entity', 1, 1, 1),
-(3, 'Module Activation', 'module', 1, 2, 0),
+(3, 'Module Activation', 'module', 1, 2, 1),
 (4, 'Billing & Invoicing', 'billing-invoicing', 1, 3, 1),
 (5, 'Users', 'entity-user', 1, 4, 1),
-(6, 'Members', 'Members', NULL, 2, 0),
-(7, 'Leads', 'Leads', 6, 1, 0),
-(8, 'Conversion Rule', 'Conversion Rule', 6, 2, 0),
-(9, 'Member', 'Member', 6, 3, 0),
-(10, 'List', 'List', 6, 4, 0),
-(11, 'Profile Field', 'Profile Field', 6, 5, 0),
+(6, 'Members', 'Members', NULL, 2, 1),
+(7, 'Leads', 'Leads', 6, 1, 1),
+(8, 'Conversion Rule', 'Conversion Rule', 6, 2, 1),
+(9, 'Member', 'Member', 6, 3, 1),
+(10, 'List', 'List', 6, 4, 1),
+(11, 'Profile Field', 'Profile Field', 6, 5, 1),
 (12, 'Marketing Campaigns', 'Marketing Campaigns', NULL, 3, 0),
 (13, 'Campaign Management', 'Campaign Management', 12, 1, 0),
 (14, 'E-Mail Marketing', 'E-Mail Marketing', 12, 2, 0),
@@ -233,7 +245,43 @@ INSERT INTO `tblmodule` (`idModule`, `strModuleName`, `strModuleUrl`, `intModule
 (34, 'Security Rights', 'Security Rights', NULL, 6, 0),
 (35, 'User Profile', 'User Profile', 34, 1, 0),
 (36, 'User Group', 'User Group', 34, 2, 0),
-(37, 'Access Rights', 'Access Rights', 34, 3, 0);
+(37, 'Access Rights', 'Access Rights', 34, 3, 0),
+(38, NULL, NULL, NULL, NULL, 1),
+(39, NULL, NULL, NULL, NULL, 1),
+(40, NULL, NULL, NULL, NULL, 1),
+(41, NULL, NULL, NULL, NULL, 1),
+(42, NULL, NULL, NULL, NULL, 1),
+(43, NULL, NULL, NULL, NULL, 0),
+(44, NULL, NULL, NULL, NULL, 0),
+(45, NULL, NULL, NULL, NULL, 0),
+(46, NULL, NULL, NULL, NULL, 0),
+(47, NULL, NULL, NULL, NULL, 0),
+(48, NULL, NULL, NULL, NULL, 0),
+(49, NULL, NULL, NULL, NULL, 0),
+(50, NULL, NULL, NULL, NULL, 0),
+(51, NULL, NULL, NULL, NULL, 0),
+(52, NULL, NULL, NULL, NULL, 0),
+(53, NULL, NULL, NULL, NULL, 0),
+(54, NULL, NULL, NULL, NULL, 0),
+(55, NULL, NULL, NULL, NULL, 0),
+(56, NULL, NULL, NULL, NULL, 0),
+(57, NULL, NULL, NULL, NULL, 0),
+(58, NULL, NULL, NULL, NULL, 0),
+(59, NULL, NULL, NULL, NULL, 0),
+(60, NULL, NULL, NULL, NULL, 0),
+(61, NULL, NULL, NULL, NULL, 0),
+(62, NULL, NULL, NULL, NULL, 0),
+(63, NULL, NULL, NULL, NULL, 0),
+(64, NULL, NULL, NULL, NULL, 0),
+(65, NULL, NULL, NULL, NULL, 0),
+(66, NULL, NULL, NULL, NULL, 0),
+(67, NULL, NULL, NULL, NULL, 0),
+(68, NULL, NULL, NULL, NULL, 0),
+(69, NULL, NULL, NULL, NULL, 0),
+(70, NULL, NULL, NULL, NULL, 0),
+(71, NULL, NULL, NULL, NULL, 0),
+(72, NULL, NULL, NULL, NULL, 0),
+(73, NULL, NULL, NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -378,12 +426,12 @@ MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 -- AUTO_INCREMENT for table `tblentityuseraccess`
 --
 ALTER TABLE `tblentityuseraccess`
-MODIFY `idUserAccess` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1230;
+MODIFY `idUserAccess` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1242;
 --
 -- AUTO_INCREMENT for table `tblmodule`
 --
 ALTER TABLE `tblmodule`
-MODIFY `idModule` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=38;
+MODIFY `idModule` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=74;
 --
 -- AUTO_INCREMENT for table `tbluserprofile`
 --
