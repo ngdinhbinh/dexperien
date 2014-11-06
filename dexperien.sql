@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 04, 2014 at 02:43 AM
+-- Generation Time: Nov 06, 2014 at 07:17 AM
 -- Server version: 5.5.39
 -- PHP Version: 5.4.31
 
@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `tblentity` (
   `strTwitterTokenId` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
   `strGoogleUserId` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
   `strGoogleTokenId` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=26 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `tblentity`
@@ -93,14 +93,14 @@ CREATE TABLE IF NOT EXISTS `tblentityuser` (
   `dtCreateDate` datetime DEFAULT NULL,
   `strLastModBy` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
   `dtLastModDate` datetime DEFAULT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `tblentityuser`
 --
 
 INSERT INTO `tblentityuser` (`idUser`, `idEntity`, `strLoginId`, `strName`, `strEmail`, `strMobileNo`, `strAndroidId`, `striOSId`, `strPassword`, `intStatus`, `strCreateBy`, `dtCreateDate`, `strLastModBy`, `dtLastModDate`) VALUES
-(1, 3, 'admin', 'Administrator', 'binhk32xp@gmail.com', '84907668625', '', 'admin', 'admin', 0, 'admin', NULL, 'admin', NULL);
+(1, 3, 'admin', 'Administrator', 'binhk32xp@gmail.com', '84907668625', '', 'admin', '21232f297a57a5a743894a0e4a801fc3', 0, 'admin', NULL, 'admin', NULL);
 
 -- --------------------------------------------------------
 
@@ -290,12 +290,12 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `tblentity`
 --
 ALTER TABLE `tblentity`
-MODIFY `idEntity` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=26;
+MODIFY `idEntity` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `tblentityuser`
 --
 ALTER TABLE `tblentityuser`
-MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `tblentityuseraccess`
 --
