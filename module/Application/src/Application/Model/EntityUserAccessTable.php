@@ -70,7 +70,11 @@ class EntityUserAccessTable extends AbstractTableGateway implements ServiceLocat
 		$result = $resultSet->toArray();		
 		return $result;
     }
-	
+	public function selectUserModule($idUser, $idModule)
+    {   	
+		$resultSet = $this->select(array('idUser' => $idUser, 'idModule' => $idModule));       
+        return $resultSet;
+    }
     public function getItem($id)
     {
         $id  = (int) $id;
@@ -93,23 +97,13 @@ class EntityUserAccessTable extends AbstractTableGateway implements ServiceLocat
 
     public function saveItem($data)
     {
-        $cache = $this->getServiceLocator()->get('cache');
         $idUserAccess = (int)$data["idUserAccess"];
-        if ($idUserType == 0) {
-            $this->insert($data);
-            if($cache->getTags(self::KEYALL))
-                $cache->clearByTags($cache->getTags(self::KEYALL));
+        if ($idUserAccess == 0) {
+            $this->insert($data);           
             $this->fetchAll();
         } else {
             if ($this->getItem($idUserAccess)) {
                 $this->update($data, array('idUserAccess' => $idUserAccess));
-
-                $key = $this->getKeyID($idUserAccess);
-                $cache->removeItem($key);
-                $this->getItem($idUserAccess);
-
-                if($cache->getTags(self::KEYALL))
-                    $cache->clearByTags($cache->getTags(self::KEYALL));
                 $this->fetchAll();
             } else {
                 throw new \Exception('Form id does not exist');
@@ -126,6 +120,12 @@ class EntityUserAccessTable extends AbstractTableGateway implements ServiceLocat
         $cache->removeItem($key);
         if($cache->getTags(self::KEYALL))
             $cache->clearByTags($cache->getTags(self::KEYALL));
+        $this->fetchAll();
+    }
+	public function deleteAll($idUser)
+    {
+        $this->delete(array('idUser' => $idUser));
+             
         $this->fetchAll();
     }
 }

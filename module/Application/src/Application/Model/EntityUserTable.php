@@ -59,43 +59,28 @@ class EntityUserTable extends AbstractTableGateway implements ServiceLocatorAwar
             $row = array();
 		}
         return $row;
-    }
-
+    }	
     public function saveItem($data)
     {
-        $cache = $this->getServiceLocator()->get('cache');
         $idUser = (int)$data["idUser"];
         if ($idUser == 0) {
-            $this->insert($data);
-            if($cache->getTags(self::KEYALL))
-                $cache->clearByTags($cache->getTags(self::KEYALL));
+            $idUser = $this->insert($data); 
+			$idUser = $this->lastInsertValue;    			
             $this->fetchAll();
         } else {
             if ($this->getItem($idUser)) {
                 $this->update($data, array('idUser' => $idUser));
-
-                $key = $this->getKeyID($idUser);
-                $cache->removeItem($key);
-                $this->getItem($idUser);
-
-                if($cache->getTags(self::KEYALL))
-                    $cache->clearByTags($cache->getTags(self::KEYALL));
                 $this->fetchAll();
             } else {
                 throw new \Exception('Form id does not exist');
             }
         }
+		return $idUser;
     }
 
     public function deleteItem($id)
     {
-        $cache = $this->getServiceLocator()->get('cache');
         $this->delete(array('idUser' => $id));
-        //Cache
-        $key = $this->getKeyID($id);
-        $cache->removeItem($key);
-        if($cache->getTags(self::KEYALL))
-            $cache->clearByTags($cache->getTags(self::KEYALL));
         $this->fetchAll();
     }
 }

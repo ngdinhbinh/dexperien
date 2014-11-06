@@ -45,13 +45,26 @@ class ModuleTable extends AbstractTableGateway implements ServiceLocatorAwareInt
     public function fetchAll()
     {      
 		$resultSet = $this->select(function (Select $select){
-			$select->columns(array('idModule', 'strModuleName', 'strModuleUrl','intModuleParent','intSort')); 
-			
+			$select->columns(array('idModule', 'strModuleName', 'strModuleUrl','intModuleParent','intSort')); 			
 			$select->order('intSort ASC'); 
 		});       
         return $resultSet;
     }
-	
+	public function selectRootModule()
+    {      
+		$resultSet = $this->select(function (Select $select){
+			$select->columns(array('idModule', 'strModuleName', 'strModuleUrl','intModuleParent','intSort')); 	
+			$select->where("intModuleParent is NULL"); 				
+			$select->order('intSort ASC'); 
+		});       
+        return $resultSet;
+    }
+	public function selectChildModule($id)
+    {      
+		$id  = (int) $id;		
+		$resultSet = $this->select(array('intModuleParent' => $id));       
+        return $resultSet;
+    }
 	
     public function getItem($id)
     {
