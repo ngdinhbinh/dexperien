@@ -43,8 +43,7 @@ class EntityUserAccessController extends AbstractActionController
 
     public function saveAction()
     {
-		$loginName = $this->getServiceLocator()->get('AuthService')->getIdentity();	
-		
+		$loginName = $this->getServiceLocator()->get('AuthService')->getIdentity();			
         $request = $this->getRequest();
         if ($request->isPost()) {
             $formData = ($request->getPost());
