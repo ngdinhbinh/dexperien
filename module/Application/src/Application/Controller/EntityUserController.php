@@ -85,7 +85,7 @@ class EntityUserController extends AbstractActionController
 				"dtLastModDate"=>$request->getPost("dtLastModDate")
             );
 			$password = $request->getPost("strPassword");
-			if(count(trim($password))> 0)
+			if(strlen(trim($password)) > 0)
 				$data["strPassword"] = md5($password);
             
             $id = $this->getEntityUserTable()->saveItem($data);

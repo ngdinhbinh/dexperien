@@ -2,6 +2,7 @@
 	$accessRight = $_SESSION['accessRight'];
 	$arrRightView = explode("|", $accessRight);	
 	$controllerName =  $this->controllername;
+	
 ?>
 <div id="sidebar-left" class="col-xs-2 col-sm-2">
     <ul class="nav main-menu">
@@ -24,9 +25,6 @@
 				<?php  if(in_array("entity-user",$arrRightView)) { ?>
 				<li class=""><a class="<?php echo ($controllerName == "EntityUserController") ? "active" : "" ; ?>" href="<?php echo $this->basePath('entity-user') ?>">Users</a></li>
 				<?php } ?>
-				<?php  if(in_array("users",$arrRightView)) { ?>
-				<li class=""><a class="" href="#">Users</a></li>
-				<?php } ?>
             </ul>
         </li>
 		
@@ -38,11 +36,21 @@
                  <span class="hidden-xs">Members</span>
             </a>
             <ul class="dropdown-menu">
-                <li class=""><a class="" href="#">Leads</a></li>
+				<?php  if(in_array("Leads",$arrRightView)) { ?>
+					<li class=""><a class="" href="#">Leads</a></li>
+				<?php } ?>
+				<?php  if(in_array("Conversion Rule",$arrRightView)) { ?>
                 <li class=""><a class="" href="#">Conversion Rule</a></li>
+				<?php } ?>
+				<?php  if(in_array("Members",$arrRightView)) { ?>
 				<li class=""><a class="" href="#">Members</a></li>
+				<?php } ?>
+				<?php  if(in_array("List",$arrRightView)) { ?>
 				<li class=""><a class="" href="#">List</a></li>
+				<?php } ?>
+				<?php  if(in_array("Profile Field",$arrRightView)) { ?>
 				<li class=""><a class="" href="#">Profile Field</a></li>
+				<?php } ?>
             </ul>
         </li>
 		
@@ -54,17 +62,39 @@
                  <span class="hidden-xs">Marketing Campaigns</span>
             </a>
             <ul class="dropdown-menu">
+				<?php  if(in_array("Campaign Management",$arrRightView)) { ?>
                 <li class=""><a class="" href="#">Campaign Management</a></li>
+				<?php } ?>
+				<?php  if(in_array("E-Mail Marketing",$arrRightView)) { ?>
                 <li class=""><a class="" href="#">E-Mail Marketing</a></li>
+				<?php } ?>
+				<?php  if(in_array("SMS Marketing",$arrRightView)) { ?>
 				<li class=""><a class="" href="#">SMS Marketing</a></li>
+				<?php } ?>
+				<?php  if(in_array("Social Media",$arrRightView)) { ?>
 				<li class=""><a class="" href="#">Social Media</a></li>
+				<?php }?>
+				<?php  if(in_array("Advertisement",$arrRightView)) { ?>
 				<li class=""><a class="" href="#">Advertisement</a></li>
+				<?php }?>
+				<?php  if(in_array("Promotion",$arrRightView)) { ?>
 				<li class=""><a class="" href="#">Promotion</a></li>
+				<?php } ?>
+				<?php  if(in_array("Marketing Videos",$arrRightView)) { ?>
 				<li class=""><a class="" href="#">Marketing Videos</a></li>
+				<?php } ?>
+				<?php  if(in_array("E-Magazine",$arrRightView)) { ?>
 				<li class=""><a class="" href="#">E-Magazine</a></li>
+				<?php } ?>
+				<?php  if(in_array("Referral Program",$arrRightView)) { ?>
 				<li class=""><a class="" href="#">Referral Program</a></li>
+				<?php } ?>
+				<?php  if(in_array("E-Voucher",$arrRightView)) { ?>
 				<li class=""><a class="" href="#">E-Voucher</a></li>
+				<?php } ?>
+				<?php  if(in_array("Survey",$arrRightView)) { ?>
 				<li class=""><a class="" href="#">Survey</a></li>
+				<?php } ?>
             </ul>
         </li>
 		
@@ -95,14 +125,30 @@
 					</a>
 					
 					<ul class="dropdown-menu">
+						<?php  if(in_array("Country",$arrRightView)) { ?>
 						<li class=""><a class="" href="#">Country</a></li>
+						<?php } ?>
+						<?php  if(in_array("Region",$arrRightView)) { ?>
 						<li class=""><a class="" href="#">Region</a></li>
+						<?php } ?>
+						<?php  if(in_array("State",$arrRightView)) { ?>
 						<li class=""><a class="" href="#">State</a></li>
+						<?php } ?>
+						<?php  if(in_array("City",$arrRightView)) { ?>
 						<li class=""><a class="" href="#">City</a></li>
+						<?php } ?>
+						<?php  if(in_array("Industry",$arrRightView)) { ?>
 						<li class=""><a class="" href="#">Industry</a></li>
+						<?php } ?>
+						<?php  if(in_array("IPCountry",$arrRightView)) { ?>
 						<li class=""><a class="" href="#">IPCountry</a></li>
+						<?php } ?>
+						<?php  if(in_array("IPBlacklist",$arrRightView)) { ?>
 						<li class=""><a class="" href="#">IPBlacklist</a></li>
+						<?php } ?>
+						<?php  if(in_array("Language",$arrRightView)) { ?>
 						<li class=""><a class="" href="#">Language</a></li>
+						<?php } ?>
 					</ul>
 				</li>
 				<li class="dropdown">
@@ -112,9 +158,15 @@
 					</a>
 					
 					<ul class="dropdown-menu">
+						<?php  if(in_array("User Profile",$arrRightView)) { ?>
 						<li class=""><a class="" href="#">User Profile</a></li>
+						<?php } ?>
+						<?php  if(in_array("User Group",$arrRightView)) { ?>
 						<li class=""><a class="" href="#">User Group</a></li>
+						<?php } ?>
+						<?php  if(in_array("Access Rights",$arrRightView)) { ?>
 						<li class=""><a class="" href="#">Access Rights</a></li>
+						<?php } ?>
 					</ul>
 				</li>
             </ul>

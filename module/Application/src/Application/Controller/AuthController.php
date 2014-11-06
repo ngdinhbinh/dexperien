@@ -67,7 +67,7 @@ class AuthController extends AbstractActionController
 				$tblRole = $this->tblEntityUserAccess->getItemBystrLoginId($strUserId);
 				$access = "";
 				foreach($tblRole as $key=>$value){
-					if($value['intAccess'] == 1 ){
+					if($value['intView'] == 1 ){
 						$access .= $value['strModuleUrl']."|";
 					}
 				}

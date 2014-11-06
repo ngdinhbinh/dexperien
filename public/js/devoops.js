@@ -10,6 +10,13 @@
 // homepage: http://arshaw.com/fullcalendar
 // require moment.js
 //
+$(document).ready(function(){		
+	$("#sidebar-left ul.dropdown-menu").each(function(){
+		var menuchild = $(this).find("li");
+		if(menuchild.length == 0)
+			$(this).parent("li").hide();		
+	})
+})
 function LoadCalendarScript(callback){
 	function LoadFullCalendarScript(){
 		if(!$.fn.fullCalendar){
