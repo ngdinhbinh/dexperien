@@ -1,8 +1,9 @@
 <?php 
 	$accessRight = $_SESSION['accessRight'];
+	$intUserType = $_SESSION['intUserType'];
 	$arrRightView = explode("|", $accessRight);	
 	$controllerName =  $this->controllername;
-	
+
 ?>
 <div id="sidebar-left" class="col-xs-2 col-sm-2">
     <ul class="nav main-menu">
@@ -13,16 +14,16 @@
                 <span class="hidden-xs">Entity</span>
             </a>
 			 <ul class="dropdown-menu">      
-				<?php  if(in_array("entity",$arrRightView)) { ?>
+				<?php  if(in_array("entity",$arrRightView) || (int)$intUserType == 0) { ?>
                 <li class=""><a class="<?php echo ($controllerName == "EntityController") ? "active" : "" ; ?>" href="<?php echo $this->basePath('entity') ?>">Entity Profile</a></li>
 				<?php } ?>				
-				 <?php  if(in_array("module",$arrRightView)) { ?>
+				 <?php  if(in_array("module",$arrRightView) || (int)$intUserType == 0 ) { ?>
 				<li class=""><a class="<?php echo ($controllerName == "ModuleController") ? "active" : "" ; ?>" href="<?php echo $this->basePath('module') ?>">Module Activation</a></li>
 				<?php } ?> 
-				<?php  if(in_array("billing-invoicing",$arrRightView)) { ?>
+				<?php  if(in_array("billing-invoicing",$arrRightView) || (int)$intUserType == 0) { ?>
 				<li class=""><a class="" href="#">Billing & Invoicing</a></li>
 				<?php } ?>
-				<?php  if(in_array("entity-user",$arrRightView)) { ?>
+				<?php  if(in_array("entity-user",$arrRightView) || (int)$intUserType == 0) { ?>
 				<li class=""><a class="<?php echo ($controllerName == "EntityUserController") ? "active" : "" ; ?>" href="<?php echo $this->basePath('entity-user') ?>">Users</a></li>
 				<?php } ?>
             </ul>
@@ -36,19 +37,19 @@
                  <span class="hidden-xs">Members</span>
             </a>
             <ul class="dropdown-menu">
-				<?php  if(in_array("Leads",$arrRightView)) { ?>
+				<?php  if(in_array("Leads",$arrRightView) || (int)$intUserType == 0) { ?>
 					<li class=""><a class="" href="#">Leads</a></li>
 				<?php } ?>
-				<?php  if(in_array("Conversion Rule",$arrRightView)) { ?>
+				<?php  if(in_array("Conversion Rule",$arrRightView) || (int)$intUserType == 0) { ?>
                 <li class=""><a class="" href="#">Conversion Rule</a></li>
 				<?php } ?>
-				<?php  if(in_array("Members",$arrRightView)) { ?>
+				<?php  if(in_array("Members",$arrRightView) || (int)$intUserType == 0) { ?>
 				<li class=""><a class="" href="#">Members</a></li>
 				<?php } ?>
-				<?php  if(in_array("List",$arrRightView)) { ?>
+				<?php  if(in_array("List",$arrRightView) || (int)$intUserType == 0) { ?>
 				<li class=""><a class="" href="#">List</a></li>
 				<?php } ?>
-				<?php  if(in_array("Profile Field",$arrRightView)) { ?>
+				<?php  if(in_array("Profile Field",$arrRightView) || (int)$intUserType == 0) { ?>
 				<li class=""><a class="" href="#">Profile Field</a></li>
 				<?php } ?>
             </ul>
@@ -62,37 +63,37 @@
                  <span class="hidden-xs">Marketing Campaigns</span>
             </a>
             <ul class="dropdown-menu">
-				<?php  if(in_array("Campaign Management",$arrRightView)) { ?>
+				<?php  if(in_array("Campaign Management",$arrRightView) || (int)$intUserType == 0) { ?>
                 <li class=""><a class="" href="#">Campaign Management</a></li>
 				<?php } ?>
-				<?php  if(in_array("E-Mail Marketing",$arrRightView)) { ?>
+				<?php  if(in_array("E-Mail Marketing",$arrRightView) || (int)$intUserType == 0) { ?>
                 <li class=""><a class="" href="#">E-Mail Marketing</a></li>
 				<?php } ?>
-				<?php  if(in_array("SMS Marketing",$arrRightView)) { ?>
+				<?php  if(in_array("SMS Marketing",$arrRightView) || (int)$intUserType == 0) { ?>
 				<li class=""><a class="" href="#">SMS Marketing</a></li>
 				<?php } ?>
-				<?php  if(in_array("Social Media",$arrRightView)) { ?>
+				<?php  if(in_array("Social Media",$arrRightView) || (int)$intUserType == 0) { ?>
 				<li class=""><a class="" href="#">Social Media</a></li>
 				<?php }?>
-				<?php  if(in_array("Advertisement",$arrRightView)) { ?>
+				<?php  if(in_array("Advertisement",$arrRightView) || (int)$intUserType == 0) { ?>
 				<li class=""><a class="" href="#">Advertisement</a></li>
 				<?php }?>
-				<?php  if(in_array("Promotion",$arrRightView)) { ?>
+				<?php  if(in_array("Promotion",$arrRightView) || (int)$intUserType == 0) { ?>
 				<li class=""><a class="" href="#">Promotion</a></li>
 				<?php } ?>
-				<?php  if(in_array("Marketing Videos",$arrRightView)) { ?>
+				<?php  if(in_array("Marketing Videos",$arrRightView) || (int)$intUserType == 0) { ?>
 				<li class=""><a class="" href="#">Marketing Videos</a></li>
 				<?php } ?>
-				<?php  if(in_array("E-Magazine",$arrRightView)) { ?>
+				<?php  if(in_array("E-Magazine",$arrRightView) || (int)$intUserType == 0) { ?>
 				<li class=""><a class="" href="#">E-Magazine</a></li>
 				<?php } ?>
-				<?php  if(in_array("Referral Program",$arrRightView)) { ?>
+				<?php  if(in_array("Referral Program",$arrRightView) || (int)$intUserType == 0) { ?>
 				<li class=""><a class="" href="#">Referral Program</a></li>
 				<?php } ?>
-				<?php  if(in_array("E-Voucher",$arrRightView)) { ?>
+				<?php  if(in_array("E-Voucher",$arrRightView) || (int)$intUserType == 0) { ?>
 				<li class=""><a class="" href="#">E-Voucher</a></li>
 				<?php } ?>
-				<?php  if(in_array("Survey",$arrRightView)) { ?>
+				<?php  if(in_array("Survey",$arrRightView) || (int)$intUserType == 0) { ?>
 				<li class=""><a class="" href="#">Survey</a></li>
 				<?php } ?>
             </ul>
@@ -125,28 +126,28 @@
 					</a>
 					
 					<ul class="dropdown-menu">
-						<?php  if(in_array("Country",$arrRightView)) { ?>
+						<?php  if(in_array("Country",$arrRightView) || (int)$intUserType == 0) { ?>
 						<li class=""><a class="" href="#">Country</a></li>
 						<?php } ?>
-						<?php  if(in_array("Region",$arrRightView)) { ?>
+						<?php  if(in_array("Region",$arrRightView) || (int)$intUserType == 0) { ?>
 						<li class=""><a class="" href="#">Region</a></li>
 						<?php } ?>
-						<?php  if(in_array("State",$arrRightView)) { ?>
+						<?php  if(in_array("State",$arrRightView) || (int)$intUserType == 0) { ?>
 						<li class=""><a class="" href="#">State</a></li>
 						<?php } ?>
-						<?php  if(in_array("City",$arrRightView)) { ?>
+						<?php  if(in_array("City",$arrRightView) || (int)$intUserType == 0) { ?>
 						<li class=""><a class="" href="#">City</a></li>
 						<?php } ?>
-						<?php  if(in_array("Industry",$arrRightView)) { ?>
+						<?php  if(in_array("Industry",$arrRightView) || (int)$intUserType == 0) { ?>
 						<li class=""><a class="" href="#">Industry</a></li>
 						<?php } ?>
-						<?php  if(in_array("IPCountry",$arrRightView)) { ?>
+						<?php  if(in_array("IPCountry",$arrRightView) || (int)$intUserType == 0) { ?>
 						<li class=""><a class="" href="#">IPCountry</a></li>
 						<?php } ?>
-						<?php  if(in_array("IPBlacklist",$arrRightView)) { ?>
+						<?php  if(in_array("IPBlacklist",$arrRightView) || (int)$intUserType ==0) { ?>
 						<li class=""><a class="" href="#">IPBlacklist</a></li>
 						<?php } ?>
-						<?php  if(in_array("Language",$arrRightView)) { ?>
+						<?php  if(in_array("Language",$arrRightView) || (int)$intUserType == 0) { ?>
 						<li class=""><a class="" href="#">Language</a></li>
 						<?php } ?>
 					</ul>
@@ -158,13 +159,13 @@
 					</a>
 					
 					<ul class="dropdown-menu">
-						<?php  if(in_array("User Profile",$arrRightView)) { ?>
+						<?php  if(in_array("User Profile",$arrRightView) || (int)$intUserType == 0) { ?>
 						<li class=""><a class="" href="#">User Profile</a></li>
 						<?php } ?>
-						<?php  if(in_array("User Group",$arrRightView)) { ?>
+						<?php  if(in_array("User Group",$arrRightView) || (int)$intUserType == 0) { ?>
 						<li class=""><a class="" href="#">User Group</a></li>
 						<?php } ?>
-						<?php  if(in_array("Access Rights",$arrRightView)) { ?>
+						<?php  if(in_array("Access Rights",$arrRightView) || (int)$intUserType == 0) { ?>
 						<li class=""><a class="" href="#">Access Rights</a></li>
 						<?php } ?>
 					</ul>
