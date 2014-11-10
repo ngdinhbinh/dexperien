@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 06, 2014 at 08:06 PM
+-- Generation Time: Nov 10, 2014 at 11:53 AM
 -- Server version: 5.5.39
 -- PHP Version: 5.4.31
 
@@ -69,7 +69,7 @@ CREATE TABLE IF NOT EXISTS `tblentity` (
 
 INSERT INTO `tblentity` (`idEntity`, `strName`, `strIDNo`, `strEmail`, `strURL`, `strMobileNo`, `strAddress1`, `strAddress2`, `strAddress3`, `strCity`, `strState`, `strCountry`, `strBillingContact`, `strBillingEmail`, `strTechnicalContact`, `strTechnicalEmail`, `intDXPEmailGateway`, `decEmailCost`, `strSMTP`, `strEmailUser`, `strEmailPassword`, `intDXPSMSGateway`, `decSMSCost`, `strGatewayAddress`, `strSMSUser`, `strSMSPassword`, `strAndroidAppId`, `striOSAppid`, `strFBUserId`, `strFBTokenId`, `strTwitterUserId`, `strTwitterTokenId`, `strGoogleUserId`, `strGoogleTokenId`) VALUES
 (1, 'Supper Admin', '680402075712', 'binhk32xp@gmail.com', '', '84907668625', '', '', '', '', '', '', '', '', '', '', 0, 0, '', '', '', 0, 0, '', '', '', '', '', '', '', '', '', '', ''),
-(2, 'RentsMore', '680402075711', 'rents@gmail.com', 'www.rentsmore.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(2, 'RentsMore', '680402075711', 'rents@gmail.com', 'www.rentsmore.com', '0907668625', 'address1', 'address2', 'address3', 'ha noi', 'vietnam', 'vietnam', 'binh', 'binhk32xp@gmail.com', 'binh', 'binhk32xp@gmail.com', 0, 1, 'smtp', 'userid', 'password', 0, 1, 'sms http', 'userid', 'password', '', '', '', '', '', '', '', ''),
 (3, 'TripsMore', '680402075712', 'trips@gmail.com', 'www.tripsmore.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
@@ -102,7 +102,7 @@ CREATE TABLE IF NOT EXISTS `tblentityuser` (
 
 INSERT INTO `tblentityuser` (`idUser`, `idEntity`, `strLoginId`, `strName`, `strEmail`, `strMobileNo`, `strAndroidId`, `striOSId`, `strPassword`, `intStatus`, `strCreateBy`, `dtCreateDate`, `strLastModBy`, `dtLastModDate`, `intUserType`) VALUES
 (1, 1, 'admin', 'Supper Admin', 'binhk32xp@gmail.com', '84907668625', '1900', '1900', '21232f297a57a5a743894a0e4a801fc3', 0, 'admin', NULL, 'admin', NULL, 0),
-(5, 2, 'chinh', 'nmc0987', 'nmc0987', '0907668625', '1900', '1080', '21232f297a57a5a743894a0e4a801fc3', 0, 'nmc0987', NULL, 'nmc0987', NULL, 1),
+(5, 2, 'chinh', 'nmc0987', 'nmc0987', '0907668625', '1900', '1080', '21232f297a57a5a743894a0e4a801fc3', 0, 'admin', NULL, 'nmc0987', NULL, 1),
 (7, 2, 'binh', 'binh nguyen', 'binhk32xp@gmail.com', '+84907668625', '1004', '1004', '21232f297a57a5a743894a0e4a801fc3', 0, 'chinh', NULL, 'chinh', NULL, 2);
 
 -- --------------------------------------------------------
@@ -122,22 +122,13 @@ CREATE TABLE IF NOT EXISTS `tblentityuseraccess` (
   `intAdd` int(11) DEFAULT NULL,
   `intDelete` int(11) DEFAULT NULL,
   `intEdit` int(11) DEFAULT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1242 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1290 ;
 
 --
 -- Dumping data for table `tblentityuseraccess`
 --
 
 INSERT INTO `tblentityuseraccess` (`idUserAccess`, `idUser`, `idModule`, `intAccess`, `strLastModBy`, `dtLastModDate`, `intView`, `intAdd`, `intDelete`, `intEdit`) VALUES
-(566, 1, 2, 1, 'admin', '2014-11-06 14:01:22', 1, 1, 1, 1),
-(567, 1, 3, 1, 'admin', '2014-11-06 14:01:22', 1, 1, 1, 1),
-(568, 1, 4, 1, 'admin', '2014-11-06 14:01:22', 1, 1, 1, 1),
-(569, 1, 5, 1, 'admin', '2014-11-06 14:01:22', 1, 1, 1, 1),
-(570, 1, 7, 1, 'admin', '2014-11-06 14:01:22', 1, 1, 1, 1),
-(571, 1, 8, 1, 'admin', '2014-11-06 14:01:22', 1, 1, 1, 1),
-(572, 1, 9, 1, 'admin', '2014-11-06 14:01:22', 1, 1, 1, 1),
-(573, 1, 10, 1, 'admin', '2014-11-06 14:01:22', 1, 1, 1, 1),
-(574, 1, 11, 1, 'admin', '2014-11-06 14:01:22', 1, 1, 1, 1),
 (575, 1, 13, 1, 'admin', '2014-11-06 14:01:22', 1, 1, 1, 1),
 (576, 1, 14, 1, 'admin', '2014-11-06 14:01:22', 1, 1, 1, 1),
 (577, 1, 15, 1, 'admin', '2014-11-06 14:01:22', 1, 1, 1, 1),
@@ -164,30 +155,24 @@ INSERT INTO `tblentityuseraccess` (`idUserAccess`, `idUser`, `idModule`, `intAcc
 (1199, 5, 3, 1, 'nmc0987', '2014-11-06 17:57:21', 1, 1, 1, 1),
 (1200, 5, 4, 1, 'nmc0987', '2014-11-06 17:57:21', 1, 1, 1, 1),
 (1201, 5, 5, 1, 'nmc0987', '2014-11-06 17:57:21', 1, 1, 1, 1),
-(1218, 7, 2, 1, 'admin', '2014-11-06 18:40:37', 0, 0, 0, 0),
-(1219, 7, 3, 1, 'admin', '2014-11-06 18:40:37', 0, 0, 0, 0),
-(1220, 7, 4, 1, 'admin', '2014-11-06 18:40:37', 0, 0, 0, 0),
-(1221, 7, 5, 1, 'admin', '2014-11-06 18:40:37', 1, 1, 0, 1),
-(1222, 7, 2, 1, 'chinh', '2014-11-06 19:00:02', 0, 0, 0, 0),
-(1223, 7, 3, 1, 'chinh', '2014-11-06 19:00:02', 0, 0, 0, 0),
-(1224, 7, 4, 1, 'chinh', '2014-11-06 19:00:02', 0, 0, 0, 0),
-(1225, 7, 5, 1, 'chinh', '2014-11-06 19:00:02', 1, 1, 1, 1),
-(1226, 7, 2, 1, 'chinh', '2014-11-06 19:00:10', 1, 1, 1, 1),
-(1227, 7, 3, 1, 'chinh', '2014-11-06 19:00:10', 1, 1, 1, 1),
-(1228, 7, 4, 1, 'chinh', '2014-11-06 19:00:10', 1, 1, 1, 1),
-(1229, 7, 5, 1, 'chinh', '2014-11-06 19:00:10', 1, 1, 1, 1),
-(1230, 1, 2, 1, 'admin', '2014-11-06 19:17:55', 1, 1, 1, 1),
-(1231, 1, 4, 1, 'admin', '2014-11-06 19:17:55', 1, 1, 1, 1),
-(1232, 1, 5, 1, 'admin', '2014-11-06 19:17:55', 1, 1, 1, 1),
-(1233, 1, 2, 1, 'admin', '2014-11-06 19:20:42', 1, 1, 1, 1),
-(1234, 1, 4, 1, 'admin', '2014-11-06 19:20:42', 1, 1, 1, 1),
-(1235, 1, 5, 1, 'admin', '2014-11-06 19:20:42', 1, 1, 1, 1),
-(1236, 1, 2, 1, 'admin', '2014-11-06 19:24:20', 1, 1, 1, 1),
-(1237, 1, 4, 1, 'admin', '2014-11-06 19:24:20', 1, 1, 1, 1),
-(1238, 1, 5, 1, 'admin', '2014-11-06 19:24:21', 1, 1, 1, 1),
-(1239, 1, 2, 1, 'admin', '2014-11-06 19:24:52', 1, 1, 1, 1),
-(1240, 1, 4, 1, 'admin', '2014-11-06 19:24:52', 1, 1, 1, 1),
-(1241, 1, 5, 1, 'admin', '2014-11-06 19:24:52', 1, 1, 1, 1);
+(1269, 1, 2, 1, 'admin', '2014-11-08 02:25:36', 1, 1, 1, 1),
+(1270, 1, 3, 1, 'admin', '2014-11-08 02:25:36', 1, 1, 1, 1),
+(1271, 1, 4, 1, 'admin', '2014-11-08 02:25:36', 1, 1, 1, 1),
+(1272, 1, 5, 1, 'admin', '2014-11-08 02:25:36', 1, 1, 1, 1),
+(1273, 1, 7, 1, 'admin', '2014-11-08 02:25:36', 1, 1, 1, 1),
+(1274, 1, 8, 1, 'admin', '2014-11-08 02:25:36', 1, 1, 1, 1),
+(1275, 1, 9, 1, 'admin', '2014-11-08 02:25:36', 1, 1, 1, 1),
+(1276, 1, 10, 1, 'admin', '2014-11-08 02:25:36', 1, 1, 1, 1),
+(1277, 1, 11, 1, 'admin', '2014-11-08 02:25:36', 1, 1, 1, 1),
+(1281, 7, 2, 1, 'chinh', '2014-11-08 03:33:08', 1, 1, 1, 1),
+(1282, 7, 3, 1, 'chinh', '2014-11-08 03:33:08', 0, 0, 0, 0),
+(1283, 7, 4, 1, 'chinh', '2014-11-08 03:33:08', 1, 1, 1, 1),
+(1284, 7, 5, 1, 'chinh', '2014-11-08 03:33:08', 0, 0, 0, 0),
+(1285, 7, 7, 1, 'chinh', '2014-11-08 03:33:08', 0, 0, 0, 0),
+(1286, 7, 8, 1, 'chinh', '2014-11-08 03:33:08', 0, 0, 0, 0),
+(1287, 7, 9, 1, 'chinh', '2014-11-08 03:33:08', 0, 0, 0, 0),
+(1288, 7, 10, 1, 'chinh', '2014-11-08 03:33:08', 0, 0, 0, 0),
+(1289, 7, 11, 1, 'chinh', '2014-11-08 03:33:08', 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -201,87 +186,52 @@ CREATE TABLE IF NOT EXISTS `tblmodule` (
   `strModuleUrl` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
   `intModuleParent` int(11) DEFAULT NULL,
   `intSort` int(11) DEFAULT NULL,
-  `intActive` int(11) DEFAULT NULL
+  `intActive` int(11) DEFAULT NULL,
+  `strModuleUrlParent` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=74 ;
 
 --
 -- Dumping data for table `tblmodule`
 --
 
-INSERT INTO `tblmodule` (`idModule`, `strModuleName`, `strModuleUrl`, `intModuleParent`, `intSort`, `intActive`) VALUES
-(1, 'Entity', 'entity', NULL, 1, 1),
-(2, 'Entity Profile', 'entity', 1, 1, 1),
-(3, 'Module Activation', 'module', 1, 2, 1),
-(4, 'Billing & Invoicing', 'billing-invoicing', 1, 3, 1),
-(5, 'Users', 'entity-user', 1, 4, 1),
-(6, 'Members', 'Members', NULL, 2, 1),
-(7, 'Leads', 'Leads', 6, 1, 1),
-(8, 'Conversion Rule', 'Conversion Rule', 6, 2, 1),
-(9, 'Member', 'Member', 6, 3, 1),
-(10, 'List', 'List', 6, 4, 1),
-(11, 'Profile Field', 'Profile Field', 6, 5, 1),
-(12, 'Marketing Campaigns', 'Marketing Campaigns', NULL, 3, 0),
-(13, 'Campaign Management', 'Campaign Management', 12, 1, 0),
-(14, 'E-Mail Marketing', 'E-Mail Marketing', 12, 2, 0),
-(15, 'SMS Marketing', 'SMS Marketing', 12, 3, 0),
-(16, 'Social Media', 'Social Media', 12, 4, 0),
-(17, 'Advertisement', 'Advertisement', 12, 5, 0),
-(18, 'Promotion', 'Promotion', 12, 6, 0),
-(19, 'Marketing Videos', 'Marketing Videos', 12, 7, 0),
-(20, 'E-Magazine', 'E-Magazine', 12, 8, 0),
-(21, 'Referral Program', 'Referral Program', 12, 9, 0),
-(22, 'E-Voucher', 'E-Voucher', 12, 10, 0),
-(23, 'Survey', 'Survey', 12, 11, 0),
-(24, 'Reports', 'Reports', NULL, 4, 0),
-(25, 'Master Data', 'Master Data', NULL, 5, 0),
-(26, 'Country', 'Country', 25, 1, 0),
-(27, 'Region', 'Region', 25, 2, 0),
-(28, 'State', 'State', 25, 3, 0),
-(29, 'City', 'City', 25, 4, 0),
-(30, 'Industry', 'Industry', 25, 5, 0),
-(31, 'IPCountry', 'IPCountry', 25, 6, 0),
-(32, 'IPBlacklist', 'IPBlacklist', 25, 7, 0),
-(33, 'Language', 'Language', 25, 8, 0),
-(34, 'Security Rights', 'Security Rights', NULL, 6, 0),
-(35, 'User Profile', 'User Profile', 34, 1, 0),
-(36, 'User Group', 'User Group', 34, 2, 0),
-(37, 'Access Rights', 'Access Rights', 34, 3, 0),
-(38, NULL, NULL, NULL, NULL, 1),
-(39, NULL, NULL, NULL, NULL, 1),
-(40, NULL, NULL, NULL, NULL, 1),
-(41, NULL, NULL, NULL, NULL, 1),
-(42, NULL, NULL, NULL, NULL, 1),
-(43, NULL, NULL, NULL, NULL, 0),
-(44, NULL, NULL, NULL, NULL, 0),
-(45, NULL, NULL, NULL, NULL, 0),
-(46, NULL, NULL, NULL, NULL, 0),
-(47, NULL, NULL, NULL, NULL, 0),
-(48, NULL, NULL, NULL, NULL, 0),
-(49, NULL, NULL, NULL, NULL, 0),
-(50, NULL, NULL, NULL, NULL, 0),
-(51, NULL, NULL, NULL, NULL, 0),
-(52, NULL, NULL, NULL, NULL, 0),
-(53, NULL, NULL, NULL, NULL, 0),
-(54, NULL, NULL, NULL, NULL, 0),
-(55, NULL, NULL, NULL, NULL, 0),
-(56, NULL, NULL, NULL, NULL, 0),
-(57, NULL, NULL, NULL, NULL, 0),
-(58, NULL, NULL, NULL, NULL, 0),
-(59, NULL, NULL, NULL, NULL, 0),
-(60, NULL, NULL, NULL, NULL, 0),
-(61, NULL, NULL, NULL, NULL, 0),
-(62, NULL, NULL, NULL, NULL, 0),
-(63, NULL, NULL, NULL, NULL, 0),
-(64, NULL, NULL, NULL, NULL, 0),
-(65, NULL, NULL, NULL, NULL, 0),
-(66, NULL, NULL, NULL, NULL, 0),
-(67, NULL, NULL, NULL, NULL, 0),
-(68, NULL, NULL, NULL, NULL, 0),
-(69, NULL, NULL, NULL, NULL, 0),
-(70, NULL, NULL, NULL, NULL, 0),
-(71, NULL, NULL, NULL, NULL, 0),
-(72, NULL, NULL, NULL, NULL, 0),
-(73, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `tblmodule` (`idModule`, `strModuleName`, `strModuleUrl`, `intModuleParent`, `intSort`, `intActive`, `strModuleUrlParent`) VALUES
+(1, 'Entity', 'entity', NULL, 1, 1, NULL),
+(2, 'Entity Profile', 'entity', 1, 1, 1, 'entity'),
+(3, 'Module Activation', 'module', 1, 2, 1, 'entity'),
+(4, 'Billing & Invoicing', 'billing-invoicing', 1, 3, 1, 'entity'),
+(5, 'Users', 'entity-user', 1, 4, 1, 'entity'),
+(6, 'Members', 'Members', NULL, 2, 1, NULL),
+(7, 'Leads', 'Leads', 6, 1, 1, 'Members'),
+(8, 'Conversion Rule', 'Conversion Rule', 6, 2, 1, 'Members'),
+(9, 'Member', 'Member', 6, 3, 1, 'Members'),
+(10, 'List', 'List', 6, 4, 1, 'Members'),
+(11, 'Profile Field', 'Profile Field', 6, 5, 1, 'Members'),
+(12, 'Marketing Campaigns', 'Marketing Campaigns', NULL, 3, 0, NULL),
+(13, 'Campaign Management', 'Campaign Management', 12, 1, 0, 'Marketing Campaigns'),
+(14, 'E-Mail Marketing', 'E-Mail Marketing', 12, 2, 0, 'Marketing Campaigns'),
+(15, 'SMS Marketing', 'SMS Marketing', 12, 3, 0, 'Marketing Campaigns'),
+(16, 'Social Media', 'Social Media', 12, 4, 0, 'Marketing Campaigns'),
+(17, 'Advertisement', 'Advertisement', 12, 5, 0, 'Marketing Campaigns'),
+(18, 'Promotion', 'Promotion', 12, 6, 0, 'Marketing Campaigns'),
+(19, 'Marketing Videos', 'Marketing Videos', 12, 7, 0, 'Marketing Campaigns'),
+(20, 'E-Magazine', 'E-Magazine', 12, 8, 0, 'Marketing Campaigns'),
+(21, 'Referral Program', 'Referral Program', 12, 9, 0, 'Marketing Campaigns'),
+(22, 'E-Voucher', 'E-Voucher', 12, 10, 0, 'Marketing Campaigns'),
+(23, 'Survey', 'Survey', 12, 11, 0, 'Marketing Campaigns'),
+(24, 'Reports', 'Reports', NULL, 4, 0, NULL),
+(25, 'Master Data', 'Master Data', NULL, 5, 0, NULL),
+(26, 'Country', 'Country', 25, 1, 0, 'Master Data'),
+(27, 'Region', 'Region', 25, 2, 0, 'Master Data'),
+(28, 'State', 'State', 25, 3, 0, 'Master Data'),
+(29, 'City', 'City', 25, 4, 0, 'Master Data'),
+(30, 'Industry', 'Industry', 25, 5, 0, 'Master Data'),
+(31, 'IPCountry', 'IPCountry', 25, 6, 0, 'Master Data'),
+(32, 'IPBlacklist', 'IPBlacklist', 25, 7, 0, 'Master Data'),
+(33, 'Language', 'Language', 25, 8, 0, 'Master Data'),
+(34, 'Security Rights', 'Security Rights', NULL, 6, 0, NULL),
+(35, 'User Profile', 'User Profile', 34, 1, 0, 'Security Rights'),
+(36, 'User Group', 'User Group', 34, 2, 0, 'Security Rights'),
+(37, 'Access Rights', 'Access Rights', 34, 3, 0, 'Security Rights');
 
 -- --------------------------------------------------------
 
@@ -426,7 +376,7 @@ MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 -- AUTO_INCREMENT for table `tblentityuseraccess`
 --
 ALTER TABLE `tblentityuseraccess`
-MODIFY `idUserAccess` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1242;
+MODIFY `idUserAccess` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1290;
 --
 -- AUTO_INCREMENT for table `tblmodule`
 --
