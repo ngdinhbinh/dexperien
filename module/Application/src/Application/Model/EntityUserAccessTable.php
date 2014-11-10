@@ -55,7 +55,7 @@ class EntityUserAccessTable extends AbstractTableGateway implements ServiceLocat
 		$sql = new Sql($this->adapter);
 		$select = $sql->select();
 		$select->from(array('f' => 'tblentityuseraccess'))->join(array('b' => 'tblmodule'), 'f.idModule = b.idModule')->join(array('c' => 'tblentityuser'), 'c.idUser = f.idUser');		
-		$select->where(array('strLoginId' => $strLoginId));
+		$select->where(array('strLoginId' => $strLoginId, 'intActive'=>1));
 		
 		$resultSet = $this->selectWith($select);
 		$result = $resultSet->toArray();		

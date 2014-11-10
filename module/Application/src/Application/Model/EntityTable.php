@@ -49,7 +49,12 @@ class EntityTable extends AbstractTableGateway implements ServiceLocatorAwareInt
          
         return $resultSet;
     }
-	
+	public function getData($idEntity )
+    {
+		$resultSet = $this->select(array("idEntity" => $idEntity));
+        $resultSet = $resultSet->toArray();
+        return $resultSet;
+    }
 	
     public function getItem($id)
     {

@@ -34,7 +34,7 @@
 	.table.beauty-table.table-hover tr td:last-child{width:500px;}
 </style>
 <div class="row">
-	<form id="defaultForm" action="<?php  echo $this->basePath() ?>/entity-user/save" method="post" class="form-horizontal">
+	<form id="frmMain" action="<?php  echo $this->basePath() ?>/entity-user/save" method="post" class="form-horizontal" validate>
 		<div class="col-xs-12 col-sm-12">
 			<div class="form-group" style="text-align: right;padding: 0 15px;">
 				<a href="<?php  echo $this->basePath() ?>/entity-user" class="btn btn-default btn-label-left"><span><i class="fa fa-clock-o txt-danger"></i></span>Cancel</a>
@@ -130,7 +130,8 @@
 						<div class="form-group">
 							<label class="col-sm-3 control-label">Password</label>
 							<div class="col-sm-5">
-								<input type="password" class="form-control" name="strPassword"  />
+								<input type="password" class="form-control" name="strPassword"  id="strPassword" placeholder="Password"/>
+								<input type="password" class="form-control" name="strRePassword" id="strRePassword" placeholder="Confirm Password"/>
 							</div>
 						</div>	
 						<div class="form-group">
@@ -275,7 +276,7 @@
         $.validator.addMethod("valueNotEquals", function(value, element, arg){
             return arg != value;
         }, "Please select an option");
-        $('#defaultForm').validate({
+        $('#frmMain').validate({
             rules: {
                 strName: {
                     required: true,
@@ -289,12 +290,14 @@
                     required: true,
                     maxlength: 200
                 },
+				strRePassword: {
+				  equalTo: "#strPassword"
+				}
             },
             errorPlacement: function(error, element) {
                 error.appendTo(element.parent());
             }
-        });
-		
+        });		
 		LoadSelect2Script(DemoSelect2);
     });
 	

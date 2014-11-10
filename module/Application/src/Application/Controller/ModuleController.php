@@ -3,13 +3,13 @@ namespace Application\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-
+use Application\Model\EntityUserAccessTable;
 
 
 class ModuleController extends AbstractActionController
 {
 	protected $moduleTable;
-	
+	protected $entityUserTable;
 	public function onDispatch( \Zend\Mvc\MvcEvent $e )
 	{
 		//Check if login 
@@ -27,9 +27,22 @@ class ModuleController extends AbstractActionController
     {
         $renderer = $this->serviceLocator->get('Zend\View\Renderer\RendererInterface');
         $renderer->HeadScript()->appendFile($renderer->basePath() . '/js/index.js','text/javascript');
+		//check userInfo
+		$loginName = $this->getServiceLocator()->get('AuthService')->getIdentity();	
+		$userInfo = $this->getEntityUserTable()->getItembyLoginId($loginName);
+		
+		$chkUsertype = (int)$_SESSION['intUserType'] ; //(int)$userInfo["intUserType"];		
+		
+		if($chkUsertype == 0) //Supper Admin
+			$data = $this->getModuleTable()->selectRootModuleAll();
+		elseif($chkUsertype == 1)	//Entity Admin
+			$data = $this->getModuleTable()->getData();
+		elseif($chkUsertype == 2)	//Entity
+			$data = $this->getModuleTable()->getData();
+			
         return new ViewModel(array(
             'data' => $this->getModuleTable()->fetchAll(),
-			'data_module_root' => $this->getModuleTable()->selectRootModuleAll(),
+			'data_module_root' => $data,
 			'this_controller' => $this,
         ));
     }
@@ -90,5 +103,13 @@ class ModuleController extends AbstractActionController
             $this->moduleTable = $sm->get('Application\Model\ModuleTable');
         }
         return $this->moduleTable;
+    }
+	public function getEntityUserTable()
+    {
+        if (!$this->entityUserTable) {
+            $sm = $this->getServiceLocator();
+            $this->entityUserTable = $sm->get('Application\Model\EntityUserTable');
+        }
+        return $this->entityUserTable;
     }
 }

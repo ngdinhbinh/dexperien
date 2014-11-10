@@ -158,21 +158,21 @@
 						<legend>SMTP Details</legend>						
 						<div class="form-group">
 							<label class="col-sm-5 control-label">Use Dexperien SMTP gateway</label>
-							<div class="col-sm-3">
-								
+							<div class="col-sm-3">								
 								<div class="toggle-switch ">
 									<label>
-										<input type="checkbox" <?php echo array_key_exists('intDXPEmailGateway', $model) ? $model["intDXPEmailGateway"] == 1 ? "checked": "" : "" ?> name="intDXPEmailGateway">
+										<input type="checkbox" <?php echo array_key_exists('intDXPEmailGateway', $model) ? $model["intDXPEmailGateway"] == 1 ? "checked": "" : "" ?> name="intDXPEmailGateway" id="intDXPEmailGateway">
 										<div class="toggle-switch-inner"></div>
 										<div class="toggle-switch-switch"><i class="fa fa-check"></i></div>
 									</label>
 								</div>
 							</div>
 						</div>
-						<div class="form-group">
+					
+						<div class="form-group smtp" <?php echo array_key_exists('intDXPEmailGateway', $model) ? $model["intDXPEmailGateway"] == 1 ? "": "style='display: none;'" : "" ?>>
 							<label class="col-sm-3 control-label">SMTP</label>
 							<div class="col-sm-5">
-								<input type="text" class="form-control" name="strSMTP"  value="<?php echo array_key_exists('strSMTP', $model) ? ($model["strSMTP"]) : "" ?>"/>
+								<input type="text" class="form-control" name="strSMTP" id="strSMTP"  value="<?php echo array_key_exists('strSMTP', $model) ? ($model["strSMTP"]) : "" ?>"/>
 							</div>
 						</div>
 						
@@ -209,33 +209,33 @@
 								
 								<div class="toggle-switch">
 									<label>
-										<input type="checkbox" name="intDXPSMSGateway" <?php echo array_key_exists('intDXPSMSGateway', $model) ? $model["intDXPSMSGateway"] == 1 ? "checked": "" : "" ?>>
+										<input type="checkbox" name="intDXPSMSGateway" id="intDXPSMSGateway" <?php echo array_key_exists('intDXPSMSGateway', $model) ? $model["intDXPSMSGateway"] == 1 ? "checked": "" : "" ?>>
 										<div class="toggle-switch-inner"></div>
 										<div class="toggle-switch-switch"><i class="fa fa-check"></i></div>
 									</label>
 								</div>
 							</div>
 						</div>
-						<div class="form-group">
+						<div class="form-group sms" <?php echo array_key_exists('intDXPSMSGateway', $model) ? $model["intDXPSMSGateway"] == 1 ? "": "style='display:none;'" : "" ?>>
 							<label class="col-sm-3 control-label">SMS HTTP</label>
 							<div class="col-sm-5">
 								<input type="text" class="form-control" name="strGatewayAddress"  value="<?php echo array_key_exists('strGatewayAddress', $model) ? ($model["strGatewayAddress"]) : "" ?>"/>
 							</div>
 						</div>
 						
-						<div class="form-group">
+						<div class="form-group sms" <?php echo array_key_exists('intDXPSMSGateway', $model) ? $model["intDXPSMSGateway"] == 1 ? "": "style='display:none;'" : "" ?>>
 							<label class="col-sm-3 control-label">User Id</label>
 							<div class="col-sm-5">
 								<input type="text" class="form-control" name="strSMSUser" value="<?php echo array_key_exists('strSMSUser', $model) ? ($model["strSMSUser"]) : "" ?>"/>
 							</div>
 						</div>
-						<div class="form-group">
+						<div class="form-group sms" <?php echo array_key_exists('intDXPSMSGateway', $model) ? $model["intDXPSMSGateway"] == 1 ? "": "style='display:none;'" : "" ?>>
 							<label class="col-sm-3 control-label">Password</label>
 							<div class="col-sm-5">
 								<input type="text" class="form-control" name="strSMSPassword"  value="<?php echo array_key_exists('strSMSPassword', $model) ? ($model["strSMSPassword"]) : "" ?>"/>
 							</div>
 						</div>
-						<div class="form-group">
+						<div class="form-group sms" <?php echo array_key_exists('intDXPSMSGateway', $model) ? $model["intDXPSMSGateway"] == 1 ? "": "style='display:none;'" : "" ?>>
 							<label class="col-sm-3 control-label">SMS Cost</label>
 							<div class="col-sm-5">
 								<input type="text" class="form-control" name="decSMSCost" value="<?php echo array_key_exists('decSMSCost', $model) ? ($model["decSMSCost"]) : "" ?>" />
@@ -355,6 +355,21 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function() {
+		$("#intDXPEmailGateway").click(function(){
+			var thisCheck = $(this).is(":checked");
+			if(thisCheck)
+				$(".smtp").show();
+			else
+				$(".smtp").hide();
+		})
+		$("#intDXPSMSGateway").click(function(){
+			var thisCheck = $(this).is(":checked");
+			if(thisCheck)
+				$(".sms").show();
+			else
+				$(".sms").hide();
+		})
+		
         // add the rule here
         $.validator.addMethod("valueNotEquals", function(value, element, arg){
             return arg != value;

@@ -70,7 +70,7 @@ class EntityUserTable extends AbstractTableGateway implements ServiceLocatorAwar
 		}
         return $row;
     }	
-	public function checkIsSupperAdmin($strLoginId){		
+	public function getItembyLoginId($strLoginId){		
         $rowset = $this->select(array('strLoginId' => $strLoginId));
         $row = $rowset->current();
 		if (!$row) {

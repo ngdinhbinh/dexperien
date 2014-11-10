@@ -34,8 +34,8 @@ class EntityUserController extends AbstractActionController
         $renderer->HeadScript()->appendFile($renderer->basePath() . '/js/index.js','text/javascript');
 		//check userInfo
 		$loginName = $this->getServiceLocator()->get('AuthService')->getIdentity();	
-		$userInfo = $this->getEntityUserTable()->checkIsSupperAdmin($loginName);
-		$chkUsertype = (int)$userInfo["intUserType"];			
+		$userInfo = $this->getEntityUserTable()->getItembyLoginId($loginName);
+		$chkUsertype = (int)$_SESSION['intUserType']; //(int)$userInfo["intUserType"];			
 		
 		if($chkUsertype == 0) //Supper Admin
 			$data = $this->getEntityUserTable()->fetchAll();
@@ -61,7 +61,7 @@ class EntityUserController extends AbstractActionController
         $model = $this->getEntityUserTable()->getItem($id);
 		$loginName = $this->getServiceLocator()->get('AuthService')->getIdentity();	
 		//check userInfo
-		$userInfo = $this->getEntityUserTable()->checkIsSupperAdmin($loginName);
+		$userInfo = $this->getEntityUserTable()->getItembyLoginId($loginName);
 		$chkUsertype = (int)$userInfo["intUserType"];	
 		//check access right
 		$idUser = (int)$userInfo["idUser"];
@@ -89,6 +89,7 @@ class EntityUserController extends AbstractActionController
 
     public function saveAction()
     {
+		date_default_timezone_set('UTC');
 		$loginName = $this->getServiceLocator()->get('AuthService')->getIdentity();	
         $request = $this->getRequest();		
         if ($request->isPost()) {			
@@ -127,7 +128,7 @@ class EntityUserController extends AbstractActionController
 					
 			foreach($access as $key=>$val){ 
 				$idModule = substr( $key, 7); 
-				$this->getEntityUserAccessTable()->deleteAll($idUser);	
+				$this->getEntityUserAccessTable()->deleteAll($idUser,$idModule);	
 				$intDelete = 0;
 				$intAdd = 0;
 				$intEdit = 0;

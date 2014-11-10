@@ -10,19 +10,7 @@
 // homepage: http://arshaw.com/fullcalendar
 // require moment.js
 //
-$(document).ready(function(){	
-	$("#sidebar-left ul.main-menu > li").each(function(){
-		var menuchild = $(this).children("ul.dropdown-menu").find("li");
-		if(menuchild.length == 0)
-			$(this).hide();		
-	})
-	$("#sidebar-left ul.main-menu li.dropdown").each(function(){
-		var menuchild = $(this).children("ul.dropdown-menu").find("li");
-		if(menuchild.length == 0)
-			$(this).hide();		
-	})
-	
-})
+
 function LoadCalendarScript(callback){
 	function LoadFullCalendarScript(){
 		if(!$.fn.fullCalendar){

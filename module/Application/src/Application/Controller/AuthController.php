@@ -67,13 +67,16 @@ class AuthController extends AbstractActionController
 				$tblRole = $this->tblEntityUserAccess->getItemBystrLoginId($strUserId);
 				$access = "";
 				$UserType = 0;
+				$accessParent="";
 				foreach($tblRole as $key=>$value){
 					if($value['intView'] == 1 ){
 						$access .= $value['strModuleUrl']."|";
+						$accessParent .= $value['strModuleUrlParent']."|";
 					}
 					$UserType = $value['intUserType'];
 				}
 				$_SESSION['accessRight'] = $access;
+				$_SESSION['accessParent'] = $accessParent;
 				$_SESSION['intUserType'] = $UserType;
 				return $this->redirect()->toRoute('home/default', array(
 						'controller' => 'index'
