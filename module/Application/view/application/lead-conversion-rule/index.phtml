@@ -1,0 +1,142 @@
+<?php 
+	$page_title = 'Conversion Rule';
+	$page_function = 'List';
+	$this->headTitle($page_title.' '.$page_function);
+	
+	//check access right
+	$intUserType = $_SESSION['intUserType'];
+	
+	$rightView = 0;
+	$rightAdd = 0;
+	$rightEdit = 0;
+	$rightDel = 0;
+	foreach($accessRight as $access):
+		$rightView  = (int)$access["intView"];
+		$rightAdd  = (int)$access["intAdd"];
+		$rightEdit  = (int)$access["intEdit"];
+		$rightDel  = (int)$access["intDelete"];
+	endforeach;
+?>
+<div class="row">
+    <div id="breadcrumb" class="col-xs-12">
+        <ol class="breadcrumb">
+            <li><a href="<?php echo $this->basePath() ?>">Dashboard</a></li>
+            <li><a href="<?php echo $this->basePath() ?>/lead-conversion-rule/index"><?php echo $page_title; ?></a></li>
+            <li><a href="#"><?php echo $page_function; ?></a></li>
+        </ol>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+         <div class="toolbar">
+            <div class="pull-right">
+                <a id="addItem" class="btn-add btn btn-default" href="<?php echo $this->basePath() . "/lead-conversion-rule/edit/id/0"; ?>">Add</a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="box">
+            <div class="box-header">
+                <div class="box-name">
+                    <i class="fa fa-users"></i>
+                    <span><?php echo $page_title.' '.$page_function; ?></span>
+                </div>
+                <div class="box-icons">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="expand-link">
+                        <i class="fa fa-expand"></i>
+                    </a>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+                <div class="no-move"></div>
+            </div>
+            <div class="box-content no-padding">
+                <table class="table table-bordered table-striped table-hover table-heading table-datatable" id="datatable-1">
+                    <thead>
+                        <tr>
+                            <th>Conversion Rule Name</th>
+						    <th>Type</th>
+						    <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                	<!-- Start: list_row -->
+                	<?php foreach($data as $item) : ?>
+						<tr class="table-body">
+						    <td class="table-body-row name column-left">
+								<a  rel="tooltip" data-placement="top" data-original-title=" Edit " href="<?php echo $this->url('home/default', array('controller'=>'lead-conversion-rule','action' => 'edit', 'id' => $item["idConversionRule"] )) ?>">
+									<?php echo $this->escapeHtml($item["strConversionRuleName"]) ;?>
+								</a>
+							</td>
+						    
+							
+						    <td class="table-body-row name column-left">
+								<?php 
+									$intType = $this->escapeHtml($item["intType"]);									
+									switch ((int)$intType) {
+										case 1:
+											echo "General";
+											break;
+										case 2:
+											echo "Campaign";
+											break;
+										case 3:
+											echo "Advertisement";
+											break;
+									}
+								?>
+							</td>
+							
+						    <td class="table-body-row last-column">
+						    	<div class="btn-group btn-control"> 
+	                                <a class="btn btn-default edit" rel="tooltip" data-placement="top" data-original-title=" Edit " href="<?php echo $this->url('home/default', array('controller'=>'lead-conversion-rule','action' => 'edit', 'id' => $item["idConversionRule"] )) ?>">
+	                                    Edit
+	                                </a>
+									<?php if((int)$intUserType == 0 ): ?>
+	                                <a class="btn btn-default delete" rel="tooltip" data-placement="top" data-original-title=" Delete " href="<?php echo $this->url('home/default', array('controller'=>'lead-conversion-rule','action' => 'delete', 'id' => $item["idConversionRule"] )) ?>">Delete
+	                                </a>
+									<?php endif; ?>
+	                            </div>
+						    </td>
+						</tr>
+					<?php endforeach; ?>
+                    <!-- End: list_row -->
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>Conversion Rule Name</th>
+						    <th>Type</th>
+						    <th></th>
+                        </tr>
+                    </tfoot>
+                </table>
+                </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="clear"></div>
+
+<script type="text/javascript">
+// Run Datables plugin and create 3 variants of settings
+function AllTables(){
+    TestTable1();
+    LoadSelect2Script(MakeSelect2);
+}
+function MakeSelect2(){
+    $('select').select2();
+    $('.dataTables_filter').each(function(){
+        $(this).find('label input[type=text]').attr('placeholder', 'Search');
+    });
+}
+$(document).ready(function() {
+    // Load Datatables and run plugin on tables 
+    LoadDataTablesScripts(AllTables);
+    // Add Drag-n-Drop feature
+    WinMove();
+});
+</script>
