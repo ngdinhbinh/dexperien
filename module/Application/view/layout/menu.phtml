@@ -43,19 +43,19 @@
             </a>
             <ul class="dropdown-menu">
 				<?php  if(in_array("Leads",$arrRightView) || (int)$intUserType == 0) { ?>
-					<li class=""><a class="" href="#">Leads</a></li>
+					<li class=""><a class="<?php echo ($controllerName == "LeadController") ? "active" : "" ; ?>" href="<?php echo $this->basePath('lead') ?>">Leads</a></li>
 				<?php } ?>
 				<?php  if(in_array("Conversion Rule",$arrRightView) || (int)$intUserType == 0) { ?>
-                <li class=""><a class="" href="#">Conversion Rule</a></li>
+                <li class=""><a class="<?php echo ($controllerName == "LeadConversionRuleController") ? "active" : "" ; ?>" href="<?php echo $this->basePath('lead-conversion-rule') ?>">Conversion Rule</a></li>
 				<?php } ?>
-				<?php  if(in_array("Members",$arrRightView) || (int)$intUserType == 0) { ?>
-				<li class=""><a class="" href="#">Members</a></li>
-				<?php } ?>
-				<?php  if(in_array("List",$arrRightView) || (int)$intUserType == 0) { ?>
-				<li class=""><a class="" href="#">List</a></li>
+				<?php  if(in_array("Contacts",$arrRightView) || (int)$intUserType == 0) { ?>
+				<li class=""><a class="" href="#">Contacts</a></li>
 				<?php } ?>
 				<?php  if(in_array("Profile Field",$arrRightView) || (int)$intUserType == 0) { ?>
 				<li class=""><a class="" href="#">Profile Field</a></li>
+				<?php } ?>
+				<?php  if(in_array("List",$arrRightView) || (int)$intUserType == 0) { ?>
+				<li class=""><a class="" href="#">List</a></li>
 				<?php } ?>
             </ul>
         </li>

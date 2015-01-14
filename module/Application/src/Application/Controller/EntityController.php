@@ -10,6 +10,7 @@ class EntityController extends AbstractActionController
 {
 	protected $entityTable;
 	protected $entityUserTable;
+	protected $entityUserAccessTable;
 	
 	public function onDispatch( \Zend\Mvc\MvcEvent $e )
 	{
@@ -42,8 +43,14 @@ class EntityController extends AbstractActionController
 		elseif($chkUsertype == 2)	//Entity
 			$data = $this->getEntityTable()->getData($userInfo["idEntity"]);
 			
+		//check access right
+		$idUser = (int)$userInfo["idUser"];
+		$strModuleUrl = 'entity-user';
+		$arr = $this->getEntityUserAccessTable()->chkAccessright($idUser,$strModuleUrl);
+		
         return new ViewModel(array(
             'data' => $data,
+			'accessRight' => $arr
         ));
     }
 
@@ -139,4 +146,14 @@ class EntityController extends AbstractActionController
         }
         return $this->entityUserTable;
     }
+	
+	public function getEntityUserAccessTable()
+    {
+        if (!$this->entityUserAccessTable) {
+            $sm = $this->getServiceLocator();
+            $this->entityUserAccessTable = $sm->get('Application\Model\EntityUserAccessTable');
+        }
+        return $this->entityUserAccessTable;
+    }
+	
 }

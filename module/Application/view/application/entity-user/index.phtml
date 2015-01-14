@@ -3,6 +3,8 @@
 	$page_function = 'List';
 	$this->headTitle($page_title.' '.$page_function);
 	//check access right
+	$intUserType = $_SESSION['intUserType'];
+	
 	$intView = 0;
 	$intAdd = 0;
 	$intEdit = 0;
@@ -84,9 +86,9 @@
 	                                    Edit
 	                                </a>
 									<?php endif; ?>
-									<?php if( $intDelete == 1 ):?>
-	                                <a class="btn btn-default delete" rel="tooltip" data-placement="top" data-original-title=" Delete " href="<?php echo $this->url('home/default', array('controller'=>'entity-user','action' => 'delete', 'id' => $item["idUser"] )) ?>">Delete
-	                                </a>
+									<?php if( (int)$intDelete == 1 || (int)$intUserType == 0 || (int)$intUserType == 1):?>
+										<a class="btn btn-default delete" rel="tooltip" data-placement="top" data-original-title=" Delete " href="<?php echo $this->url('home/default', array('controller'=>'entity-user','action' => 'delete', 'id' => $item["idUser"] )) ?>">Delete
+										</a>
 									<?php endif; ?>
 	                            </div>
 						    </td>

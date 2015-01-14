@@ -19,6 +19,8 @@ return array(
 			'Application\Controller\Entity' => 'Application\Controller\EntityController',
 			'Application\Controller\Module' => 'Application\Controller\ModuleController',
 			'Application\Controller\EntityUser' => 'Application\Controller\EntityUserController',
+			'Application\Controller\Lead' => 'Application\Controller\LeadController',
+			'Application\Controller\LeadConversionRule' => 'Application\Controller\LeadConversionRuleController',
         ),
     ),
     'router' => array(

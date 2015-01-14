@@ -20,6 +20,8 @@ use Application\Model\EntityTable;
 use Application\Model\ModuleTable;
 use Application\Model\UserTypeTable;
 use Application\Model\EntityUserTable;
+use Application\Model\LeadTable;
+use Application\Model\LeadConversionRuleTable;
 use Zend\Authentication\AuthenticationService;
 use Zend\Authentication\Adapter\DbTable as DbTableAuthAdapter;
 
@@ -74,6 +76,16 @@ class Module implements AutoloaderProviderInterface
 				'Application\Model\EntityUserTable' =>  function($sm) {
                     $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
                     $table = new EntityUserTable($dbAdapter);
+                    return $table;
+                },
+				'Application\Model\LeadTable' =>  function($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $table = new LeadTable($dbAdapter);
+                    return $table;
+                },
+				'Application\Model\LeadConversionRuleTable' =>  function($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $table = new LeadConversionRuleTable($dbAdapter);
                     return $table;
                 },
                 'Application\Model\EntityUserAccessTable' =>  function($sm) {
